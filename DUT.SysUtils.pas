@@ -14,6 +14,8 @@ type
     procedure TestUpperCaseWithAllLowerCase;
     [Test]
     procedure TestUpperCaseWithMixedCase;
+    [Test]
+    procedure TestUpperCaseWithAlreadyUpperCase;
   end;
 
 implementation
@@ -27,6 +29,15 @@ begin
   Expected := 'UPPER';
   Actual := UpperCase('upper');
   Assert.AreEqual(Expected, Actual, 'UpperCase with all lower case input failed');
+end;
+
+procedure TSysUtilsTests.TestUpperCaseWithAlreadyUpperCase;
+var
+  Expected, Actual: string;
+begin
+  Expected := 'UPPER';
+  Actual := UpperCase('UPPER');
+  Assert.AreEqual(Expected, Actual, 'UpperCase with already upper case input failed');
 end;
 
 procedure TSysUtilsTests.TestUpperCaseWithMixedCase;
