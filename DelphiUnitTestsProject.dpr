@@ -9,7 +9,8 @@ uses
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,
-  DUT.SysUtils in 'DUT.SysUtils.pas';
+  DUT.SysUtils in 'DUT.SysUtils.pas',
+  DUT.StrUtils in 'DUT.StrUtils.pas';
 
 var
   Runner: ITestRunner;
