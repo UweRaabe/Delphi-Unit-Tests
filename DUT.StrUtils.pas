@@ -7,8 +7,43 @@ uses
     , System.StrUtils
     ;
 
-
+type
+  [TestFixture]
+  TStrUtilsResemblesTests = class
+  private
+    Input1, Input2: String;
+    Actual: Boolean;
+  public
+    [Test]
+    procedure TestResembleAlmostSame;
+    [Test]
+    procedure TestResembleTextTotallyDifferent;
+  end;
 
 implementation
+
+{ TStrUtilsResemblesTests }
+
+procedure TStrUtilsResemblesTests.TestResembleAlmostSame;
+begin
+  Input1 := 'Smith';
+  Input2 := 'Smyth';
+  Actual := ResemblesText(Input1, Input2);
+  Assert.IsTrue(Actual, 'ResembleText says two similar strings aren''t.');
+  Actual := AnsiResemblesText(Input1, Input2);
+  Assert.IsTrue(Actual, 'AnsiResembleText says two similar strings aren''t.');
+end;
+
+procedure TStrUtilsResemblesTests.TestResembleTextTotallyDifferent;
+begin
+  Input1 := 'Smith';
+  Input2 := 'Jones';
+  Actual := ResemblesText(Input1, Input2);
+  Assert.IsFalse(Actual, 'ResembleText says two dissimilar strings are.');
+  Actual := AnsiResemblesText(Input1, Input2);
+  Assert.IsFalse(Actual, 'AnsiResembleText says two dissimilar strings are.');
+end;
+initialization
+  TDUnitX.RegisterTestFixture(TStrUtilsResemblesTests);
 
 end.
