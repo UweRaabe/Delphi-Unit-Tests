@@ -5,12 +5,13 @@ program DelphiUnitTestsProject;
 {$R *.res}
 
 uses
-  System.SysUtils,
+  SysUtils,
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,
   DUT.SysUtils in 'DUT.SysUtils.pas',
-  DUT.StrUtils in 'DUT.StrUtils.pas';
+  DUT.StrUtils in 'DUT.StrUtils.pas',
+  DUT.Classes in 'DUT.Classes.pas';
 
 var
   Runner: ITestRunner;
