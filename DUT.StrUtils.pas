@@ -4,7 +4,7 @@ interface
 
 uses
       DUnitX.TestFramework
-    , System.StrUtils
+    , StrUtils
     ;
 
 type
@@ -36,6 +36,20 @@ type
     procedure TestContainsTextFirstChar;
     [Test]
     procedure TestContainsTextContainsSelf;
+  end;
+
+  [TestFixture]
+  TStrUtilsIfThenTests = class
+  private
+    aTrueText, aFalseText: String;
+    Actual: String;
+  public
+    [Test]
+    procedure TestIfThenReturnsTrue;
+    [Test]
+    procedure TestIfThenReturnsFalse;
+    [Test]
+    procedure TestIfThenReturnsFalseIsOptional;
   end;
 
 implementation
@@ -109,8 +123,36 @@ begin
   Assert.IsTrue(Actual, Format('ContainsText says that %s is not contained within %s.', [aSubText, aText]));
 end;
 
+
+{ TStrUtilsIfThenTests }
+
+procedure TStrUtilsIfThenTests.TestIfThenReturnsTrue;
+begin
+  aTrueText := 'true';
+  aFalseText := 'false';
+  Actual := IfThen( True, aTrueText, aFalseText );
+  Assert.IsTrue(Actual = aTrueText, Format('IfThen should have returned %s', [ aTrueText ] ));
+end;
+
+procedure TStrUtilsIfThenTests.TestIfThenReturnsFalse;
+begin
+  aTrueText := 'true';
+  aFalseText := 'false';
+  Actual := IfThen( False, aTrueText, aFalseText );
+  Assert.IsTrue(Actual = aFalseText, Format('IfThen should have returned %s', [ aFalseText ] ));
+end;
+
+procedure TStrUtilsIfThenTests.TestIfThenReturnsFalseIsOptional;
+begin
+  aTrueText := 'true';
+  Actual := IfThen( False, aTrueText );
+  Assert.IsTrue(Actual = '', 'IfThen should have returned an empty string');
+end;
+
+
 initialization
   TDUnitX.RegisterTestFixture(TStrUtilsResemblesTests);
   TDUnitX.RegisterTestFixture(TStrUtilsContainsTextTests);
+  TDUnitX.RegisterTestFixture(TStrUtilsIfThenTests);
 
 end.

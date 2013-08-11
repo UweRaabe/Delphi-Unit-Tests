@@ -4,7 +4,7 @@ interface
 
 uses
      DUnitX.TestFramework
-   , System.SysUtils
+   , SysUtils
    ;
 
 type
