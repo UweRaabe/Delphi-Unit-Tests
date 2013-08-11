@@ -22,7 +22,27 @@ type
     procedure TestResembleTextVeryDifferentButShouldMatch;
   end;
 
+  [TestFixture]
+  TStrUtilsContainsTextTests = class
+  private
+    aText, aSubText: String;
+    Actual: Boolean;
+  public
+    [Test]
+    procedure TestContainsTextWithSimpleContains;
+    [Test]
+    procedure TestContainsTextLastChar;
+    [Test]
+    procedure TestContainsTextFirstChar;
+    [Test]
+    procedure TestContainsTextContainsSelf;
+  end;
+
 implementation
+
+uses
+      SysUtils
+    ;
 
 { TStrUtilsResemblesTests }
 
@@ -46,8 +66,6 @@ begin
   Assert.IsFalse(Actual, 'AnsiResembleText says two dissimilar strings are similar.');
 end;
 
-
-
 procedure TStrUtilsResemblesTests.TestResembleTextVeryDifferentButShouldMatch;
 begin
   Input1 := 'Soundex';
@@ -58,7 +76,41 @@ begin
   Assert.IsTrue(Actual, 'AnsiResembleText says two strings don''t match when they should.');
 end;
 
+{ TStrUtilsContainsTextTests }
+
+procedure TStrUtilsContainsTextTests.TestContainsTextFirstChar;
+begin
+  aText := 'abc';
+  aSubText := 'a';
+  Actual := ContainsText(aText, aSubText);
+  Assert.IsTrue(Actual, Format('ContainsText says that %s is not contained within %s.', [aSubText, aText]));
+end;
+
+procedure TStrUtilsContainsTextTests.TestContainsTextLastChar;
+begin
+  aText := 'abc';
+  aSubText := 'c';
+  Actual := ContainsText(aText, aSubText);
+  Assert.IsTrue(Actual, Format('ContainsText says that %s is not contained within %s.', [aSubText, aText]));
+end;
+
+procedure TStrUtilsContainsTextTests.TestContainsTextContainsSelf;
+begin
+  aText := 'abc';
+  Actual := ContainsText(aText, aText);
+  Assert.IsTrue(Actual, Format('ContainsText says that %s is not contained within %s.', [aSubText, aText]));
+end;
+
+procedure TStrUtilsContainsTextTests.TestContainsTextWithSimpleContains;
+begin
+  aText := 'abc';
+  aSubText := 'b';
+  Actual := ContainsText(aText, aSubText);
+  Assert.IsTrue(Actual, Format('ContainsText says that %s is not contained within %s.', [aSubText, aText]));
+end;
+
 initialization
   TDUnitX.RegisterTestFixture(TStrUtilsResemblesTests);
+  TDUnitX.RegisterTestFixture(TStrUtilsContainsTextTests);
 
 end.
