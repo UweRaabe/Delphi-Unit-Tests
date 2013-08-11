@@ -18,6 +18,8 @@ type
     procedure TestResembleAlmostSame;
     [Test]
     procedure TestResembleTextTotallyDifferent;
+    [Test]
+    procedure TestResembleTextVeryDifferentButShouldMatch;
   end;
 
 implementation
@@ -39,10 +41,23 @@ begin
   Input1 := 'Smith';
   Input2 := 'Jones';
   Actual := ResemblesText(Input1, Input2);
-  Assert.IsFalse(Actual, 'ResembleText says two dissimilar strings are.');
+  Assert.IsFalse(Actual, 'ResembleText says two dissimilar strings are similar.');
   Actual := AnsiResemblesText(Input1, Input2);
-  Assert.IsFalse(Actual, 'AnsiResembleText says two dissimilar strings are.');
+  Assert.IsFalse(Actual, 'AnsiResembleText says two dissimilar strings are similar.');
 end;
+
+
+
+procedure TStrUtilsResemblesTests.TestResembleTextVeryDifferentButShouldMatch;
+begin
+  Input1 := 'Soundex';
+  Input2 := 'Sownteks';
+  Actual := ResemblesText(Input1, Input2);
+  Assert.IsTrue(Actual, 'ResembleText says two strings don''t match when they should.');
+  Actual := ResemblesText(Input1, Input2);
+  Assert.IsTrue(Actual, 'AnsiResembleText says two strings don''t match when they should.');
+end;
+
 initialization
   TDUnitX.RegisterTestFixture(TStrUtilsResemblesTests);
 
