@@ -4,7 +4,11 @@ interface
 
 uses
      DUnitX.TestFramework
+{$IFDEF VER220 }
    , Classes
+{$ELSE}
+   , System.Classes
+{$ENDIF}
    ;
 
 type
@@ -43,7 +47,12 @@ type
 implementation
 
 uses
-     SysUtils;
+{$IFDEF VER220 }
+     SysUtils
+{$ELSE}
+     System.SysUtils
+{$ENDIF}
+   ;
 
 { TClassesListEnumeratorTests }
 
