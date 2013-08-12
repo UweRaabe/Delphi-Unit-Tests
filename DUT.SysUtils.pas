@@ -18,17 +18,17 @@ type
     Expected, Actual: string;
   public
     [Test]
-    procedure TestUpperCaseWithAllUpperCase;
-    [Test]
-    procedure TestUpperCaseWithAllLowerCase;
-    [Test]
-    procedure TestUpperCaseWithMixedCase;
-    [Test]
     procedure TestLowerCaseWithAllLowerCase;
     [Test]
     procedure TestLowerCaseWithAllUpperCase;
     [Test]
     procedure TestLowerCaseWithMixedCase;
+    [Test]
+    procedure TestUpperCaseWithAllUpperCase;
+    [Test]
+    procedure TestUpperCaseWithAllLowerCase;
+    [Test]
+    procedure TestUpperCaseWithMixedCase;
   end;
 
 implementation
