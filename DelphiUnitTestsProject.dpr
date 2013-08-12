@@ -5,7 +5,11 @@ program DelphiUnitTestsProject;
 {$R *.res}
 
 uses
+{$IFDEF VER220 }
   SysUtils,
+{$ELSE}
+  System.SysUtils,
+{$ENDIF}
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,

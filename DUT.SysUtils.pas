@@ -4,7 +4,11 @@ interface
 
 uses
      DUnitX.TestFramework
+{$IFDEF VER220 }
    , SysUtils
+{$ELSE}
+   , System.SysUtils
+{$ENDIF}
    ;
 
 type
