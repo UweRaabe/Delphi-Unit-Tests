@@ -29,6 +29,8 @@ type
     procedure TestUpperCaseWithAllLowerCase;
     [Test]
     procedure TestUpperCaseWithMixedCase;
+    [Test]
+    procedure TestSameText;
   end;
 
 implementation
@@ -75,6 +77,15 @@ begin
   Expected := 'UPPER';
   Actual := UpperCase('uPpEr');
   Assert.AreEqual(Expected, Actual, 'UpperCase with mixed case input failed');
+end;
+
+procedure TSysUtilsCaseTests.TestSameText;
+begin
+  Assert.IsTrue(SameText('T','t'), 'SameText failed comparing T = t');
+  Assert.IsTrue(SameText('T','T'), 'SameText failed comparing T = T');
+  Assert.IsTrue(SameText('T',''), 'SameText failed comparing T to an empty string');
+  Assert.IsTrue(SameText('','T'), 'SameText failed comparing and empty string T');
+  Assert.IsTrue(SameText('',''), 'SameText failed comparing two empty strings');  
 end;
 
 initialization
