@@ -84,7 +84,7 @@ begin
   Assert.IsTrue(SameText('T','t'), 'SameText failed comparing T = t');
   Assert.IsTrue(SameText('T','T'), 'SameText failed comparing T = T');
   Assert.IsTrue(SameText('T',''), 'SameText failed comparing T to an empty string');
-  Assert.IsTrue(SameText('','T'), 'SameText failed comparing and empty string T');
+  Assert.IsTrue(SameText('','T'), 'SameText failed comparing an empty string to T');
   Assert.IsTrue(SameText('',''), 'SameText failed comparing two empty strings');  
 end;
 
