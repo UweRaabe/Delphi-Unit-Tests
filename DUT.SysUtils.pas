@@ -83,8 +83,10 @@ procedure TSysUtilsCaseTests.TestSameText;
 begin
   Assert.IsTrue(SameText('T','t'), 'SameText failed comparing T = t');
   Assert.IsTrue(SameText('T','T'), 'SameText failed comparing T = T');
-  Assert.IsTrue(SameText('T',''), 'SameText failed comparing T to an empty string');
-  Assert.IsTrue(SameText('','T'), 'SameText failed comparing an empty string to T');
+  Assert.IsFalse(SameText('T','u'), 'SameText failed comparing t = u);
+  Assert.IsFalse(SameText('T','U'), 'SameText failed comparing T = U);
+  Assert.IsFalse(SameText('T',''), 'SameText failed comparing T to an empty string');
+  Assert.IsFalse(SameText('','T'), 'SameText failed comparing an empty string to T');
   Assert.IsTrue(SameText('',''), 'SameText failed comparing two empty strings');  
 end;
 
