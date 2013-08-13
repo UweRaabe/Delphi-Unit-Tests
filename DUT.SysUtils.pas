@@ -5,9 +5,9 @@ interface
 uses
      DUnitX.TestFramework
 {$IFDEF VER220 }
-   , DateUtils, SysUtils
+   , SysUtils
 {$ELSE}
-   , System.DateUtils, System.SysUtils
+   , System.SysUtils
 {$ENDIF}
    ;
 
