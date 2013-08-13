@@ -5,9 +5,9 @@ interface
 uses
      DUnitX.TestFramework
 {$IFDEF VER220 }
-   , SysUtils
+   , DateUtils, SysUtils
 {$ELSE}
-   , System.SysUtils
+   , System.DateUtils, System.SysUtils
 {$ENDIF}
    ;
 
@@ -24,14 +24,52 @@ type
     [Test]
     procedure TestLowerCaseWithMixedCase;
     [Test]
-    procedure TestUpperCaseWithAllUpperCase;
-    [Test]
     procedure TestUpperCaseWithAllLowerCase;
     [Test]
-    procedure TestUpperCaseWithMixedCase;
+    procedure TestUpperCaseWithAllUpperCase;
     [Test]
-    procedure TestSameText;
-  end;
+    procedure TestUpperCaseWithMixedCase;
+end;
+
+type
+  [TestFixture]
+  TSysUtilsCompareStrTests = class
+  public
+    [Test]
+    procedure TestCompareStrS1EqualsS2;
+    [Test]
+    procedure TestCompareStrS1LessThanS2;
+    [Test]
+    procedure TestCompareStrS1GreaterThanS2;
+    [Test]
+    procedure TestCompareStrWithEmptyStrings;
+end;
+
+type
+  [TestFixture]
+  TSysUtilsCompareTextTests = class
+  public
+    [Test]
+    procedure TestCompareTextS1EqualS2;
+    [Test]
+    procedure TestCompareTextS1LessThanS2;
+    [Test]
+    procedure TestCompareTextS1GreaterThanS2;
+    [Test]
+    procedure TestCompareTextWithEmptyStrings;
+end;
+
+type
+  [TestFixture]
+  TSysUtilsSameTextTests = class
+  public
+    [Test]
+    procedure TestSameTextS1EqualS2;
+    [Test]
+    procedure TestSameTextS1NotEqualS2;
+    [Test]
+    procedure TestSameTextWithEmptyStrings;
+end;
 
 implementation
 
@@ -79,18 +117,72 @@ begin
   Assert.AreEqual(Expected, Actual, 'UpperCase with mixed case input failed');
 end;
 
-procedure TSysUtilsCaseTests.TestSameText;
+
+{ TSysUtilsCompareStrTests }
+
+procedure TSysUtilsCompareStrTests.TestCompareStrS1EqualsS2;
 begin
-  Assert.IsTrue(SameText('T','t'), 'SameText failed comparing T = t');
-  Assert.IsTrue(SameText('T','T'), 'SameText failed comparing T = T');
-  Assert.IsFalse(SameText('T','u'), 'SameText failed comparing t = u);
-  Assert.IsFalse(SameText('T','U'), 'SameText failed comparing T = U);
-  Assert.IsFalse(SameText('T',''), 'SameText failed comparing T to an empty string');
-  Assert.IsFalse(SameText('','T'), 'SameText failed comparing an empty string to T');
-  Assert.IsTrue(SameText('',''), 'SameText failed comparing two empty strings');  
+  Assert.IsTrue(CompareStr('T','T') = 0, 'CompareStr failed with S1 = S2');
+end;
+
+procedure TSysUtilsCompareStrTests.TestCompareStrS1LessThanS2;
+begin
+  Assert.IsTrue(CompareStr('T','t') < 0, 'CompareStr failed with S1 < S2 ');
+end;
+
+procedure TSysUtilsCompareStrTests.TestCompareStrS1GreaterThanS2;
+begin
+  Assert.IsTrue(CompareStr('t','T') > 0, 'CompareStr failed with S1 > S1 ');
+end;
+
+procedure TSysUtilsCompareStrTests.TestCompareStrWithEmptyStrings;
+begin
+  Assert.IsTrue(CompareStr('','') = 0, 'CompareStr failed comparing two empty strings');
+end;
+
+{ TSysUtilsCompareTextTests }
+
+procedure TSysUtilsCompareTextTests.TestCompareTextS1EqualS2;
+begin
+  Assert.IsTrue(CompareText('T','t') = 0, 'CompareText failed with S1 = S2');
+end;
+
+procedure TSysUtilsCompareTextTests.TestCompareTextS1LessThanS2;
+begin
+  Assert.IsTrue(CompareText('t','u') < 0, 'CompareText failed with S1 < S2 ');
+end;
+
+procedure TSysUtilsCompareTextTests.TestCompareTextS1GreaterThanS2;
+begin
+  Assert.IsTrue(CompareText('u','t') > 0, 'CompareText failed with S1 > S1 ');
+end;
+
+procedure TSysUtilsCompareTextTests.TestCompareTextWithEmptyStrings;
+begin
+  Assert.IsTrue(CompareText('','') = 0, 'CompareText failed comparing two empty strings');
+end;
+
+{ TSysUtilsSameTextTests }
+
+procedure TSysUtilsSameTextTests.TestSameTextS1EqualS2;
+begin
+  Assert.IsTrue(SameText('T','t'), 'SameText failed with S1 = S2');
+end;
+
+procedure TSysUtilsSameTextTests.TestSameTextS1NotEqualS2;
+begin
+  Assert.IsFalse(SameText('T','u'), 'SameText failed with S1 <> S2');
+end;
+
+procedure TSysUtilsSameTextTests.TestSameTextWithEmptyStrings;
+begin
+  Assert.IsTrue(SameText('',''), 'SameText failed comparing two empty strings');
 end;
 
 initialization
   TDUnitX.RegisterTestFixture(TSysUtilsCaseTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsCompareStrTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsCompareTextTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsSameTextTests);
 
 end.
