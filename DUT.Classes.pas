@@ -4,11 +4,7 @@ interface
 
 uses
      DUnitX.TestFramework
-{$IFDEF VER220 }
-   , Classes
-{$ELSE}
    , System.Classes
-{$ENDIF}
    ;
 
 type
@@ -17,7 +13,7 @@ type
   private
     FListEnumerator : TListEnumerator;
     FList : TList;
-    Expected, Actual: string;
+    Expected: string;
   public
     [Setup]
     procedure CreateListAndEnumerator;

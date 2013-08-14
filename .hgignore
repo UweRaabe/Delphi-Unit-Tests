@@ -1,6 +1,7 @@
 glob:*.dcu
 glob:*.local
 glob:*.exe
+glob:*.rsm
 glob:*.bpl
 glob:*.~*
 glob:*.identcache
