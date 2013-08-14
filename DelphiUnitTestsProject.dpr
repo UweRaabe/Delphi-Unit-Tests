@@ -24,13 +24,9 @@ var
 
 begin
   try
-    try
     //Create the runner
     Runner := TDUnitX.CreateRunner;
     Runner.UseRTTI := True;
-    finally
-
-    end;
     //tell the runner how we will log things
     Logger := TDUnitXConsoleLogger.Create;
     runner.AddLogger(Logger);
