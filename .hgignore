@@ -5,6 +5,7 @@ glob:*.bpl
 glob:*.~*
 glob:*.identcache
 glob:*.dof
+glob:*.rsm
 glob:*.dsk
 glob:*.bak
 glob:*.old
