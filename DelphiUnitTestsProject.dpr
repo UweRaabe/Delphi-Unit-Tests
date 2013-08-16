@@ -5,17 +5,18 @@ program DelphiUnitTestsProject;
 {$R *.res}
 
 uses
-{$IFDEF VER220 }
+  {$IFDEF VER220 }
   SysUtils,
-{$ELSE}
+  {$ELSE}
   System.SysUtils,
-{$ENDIF}
+  {$ENDIF }
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,
   DUT.SysUtils in 'DUT.SysUtils.pas',
   DUT.StrUtils in 'DUT.StrUtils.pas',
-  DUT.Classes in 'DUT.Classes.pas';
+  DUT.Classes in 'DUT.Classes.pas',
+  DUT.DateUtils in 'DUT.DateUtils.pas';
 
 var
   Runner: ITestRunner;
