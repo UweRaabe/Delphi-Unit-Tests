@@ -67,6 +67,7 @@
         <DCCReference Include="DUT.SysUtils.pas"/>
         <DCCReference Include="DUT.StrUtils.pas"/>
         <DCCReference Include="DUT.Classes.pas"/>
+        <DCCReference Include="DUT.DateUtils.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
