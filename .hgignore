@@ -1,10 +1,12 @@
 glob:*.dcu
 glob:*.local
 glob:*.exe
+glob:*.rsm
 glob:*.bpl
 glob:*.~*
 glob:*.identcache
 glob:*.dof
+glob:*.rsm
 glob:*.dsk
 glob:*.rsm
 glob:*.bak
