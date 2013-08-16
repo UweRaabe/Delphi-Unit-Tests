@@ -69,6 +69,7 @@ type
     procedure TestSameTextS1NotEqualS2;
     [Test]
     procedure TestSameTextWithEmptyStrings;
+  end;
 
 type
   [TestFixture]
@@ -76,23 +77,23 @@ type
   public
     [Test]
     procedure TestTimeToStr;
-end;
+    [Test]
+    procedure TestEncodeTimeOutOfRangeHour;
+  end;
 
 type
   [TestFixture]
   TSysUtilsEncodeTimeTests = class
   public
     [Test]
-    procedure TestEncodeTime;
-    [Test]
-    procedure TestEncodeTimeOutOfRangeHour;
-    [Test]
     procedure TestEncodeTimeOutOfRangeMin;
+    [Test]
+    procedure TestEncodeTimeOutOfRangeMSec;
     [Test]
     procedure TestEncodeTimeOutOfRangeSec;
     [Test]
-    procedure TestEncodeTimeOutOfRangeMSec;
-end;
+    procedure TestEncodeTime;
+  end;
 
 type
   [TestFixture]
@@ -100,25 +101,25 @@ type
   public
     [Test]
     procedure TestDateToStr;
-end;
+  end;
 
 type
   [TestFixture]
   TSysUtilsEncodeDateTests = class
   public
     [Test]
-    procedure TestEncodeDate;
-    [Test]
-    procedure TestEncodeDateOutOfRangeYear;
-    [Test]
-    procedure TestEncodeDateOutOfRangeMonth;
-    [Test]
-    procedure TestEncodeDateOutOfRangeDay;
-    [Test]
     procedure TestEncodeDateDetectCorrectLeapYear;
     [Test]
     procedure TestEncodeDateDetectIncorrectLeapYear;
-end;
+    [Test]
+    procedure TestEncodeDateOutOfRangeDay;
+    [Test]
+    procedure TestEncodeDateOutOfRangeMonth;
+    [Test]
+    procedure TestEncodeDateOutOfRangeYear;
+    [Test]
+    procedure TestEncodeDate;
+  end;
 
 implementation
 
@@ -230,6 +231,39 @@ end;
 
 { TSysUtilsTimeToStrTests }
 
+procedure TSysUtilsTimeToStrTests.TestEncodeTimeOutOfRangeHour;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure begin EncodeTime(24,0,0,0); end;
+  Assert.WillRaise(TempMethod, EConvertError, 'EncodeTime failed to throw EConvertError exception for Hour = 24');
+end;
+
+procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeMin;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure begin EncodeTime(0,60,0,0) end;
+  Assert.WillRaise(TempMethod, EConvertError, 'EncodeTime failed to throw EConvertError exception for Min = 60');
+end;
+
+
+procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeSec;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure begin EncodeTime(0,0,60,0); end;
+  Assert.WillRaise(TempMethod, EConvertError, 'EncodeTime failed to throw EConvertError exception for Sec = 60');
+end;
+
+procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeMSec;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure begin EncodeTime(0,0,0,1000) end;
+  Assert.WillRaise(TempMethod, EConvertError,'EncodeTime failed to throw EConvertError exception for MSec = 1000');
+end;
+
 procedure TSysUtilsTimeToStrTests.TestTimeToStr;
 var
   _time : TDateTime;
@@ -257,49 +291,6 @@ begin
   Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), 'EncodeTime failed to encode 0:0:0');
 end;
 
-procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeHour;
-begin
-  try
-    EncodeTime(24,0,0,0);
-    Assert.Fail('EncodeTime failed to throw EConvertError exception for Hour = 24');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeTime correctly threw an EConvertError exception for Hour = 24');
-  end;
-end;
-
-procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeMin;
-begin
-  try
-    EncodeTime(0,60,0,0);
-    Assert.Fail('EncodeTime failed to throw EConvertError exception for Min = 60');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeTime correctly threw an EConvertError exception for Min = 60');
-  end;
-end;
-
-procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeSec;
-begin
-  try
-    EncodeTime(0,0,60,0);
-    Assert.Fail('EncodeTime failed to throw EConvertError exception for Sec = 60');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeTime correctly threw an EConvertError exception for Sec = 60');
-  end;
-end;
-
-procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeMSec;
-begin
-  try
-    EncodeTime(0,0,0,1000);
-    Assert.Fail('EncodeTime failed to throw EConvertError exception for MSec = 1000');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeTime correctly threw an EConvertError exception for MSec = 100');
-  end;
-end;
 
 { TSysUtilsDateToStrTests }
 
@@ -331,59 +322,45 @@ begin
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateOutOfRangeYear;
+var
+  TempMethod: TTestLocalMethod;
 begin
-  try
-    EncodeDate(0,1,1);
-    Assert.Fail('EncodeDate failed to throw EConvertError exception for Year = 0');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeDate correctly threw an EConvertError exception for Year = 0');
-  end;
+  TempMethod := procedure begin EncodeDate(0,1,1) end;
+    Assert.WillRaise(TempMethod, EConvertError, 'EncodeDate failed to throw EConvertError exception for Year = 0');
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateOutOfRangeMonth;
+var
+  TempMethod: TTestLocalMethod;
 begin
-  try
-    EncodeDate(1,0,1);
-    Assert.Fail('EncodeDate failed to throw EConvertError exception for Month = 0');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeDate correctly threw an EConvertError exception for Month = 0');
-  end;
+  TempMethod := procedure begin EncodeDate(1,0,1) end;;
+  Assert.WillRaise(TempMethod, EConvertError, 'EncodeDate failed to throw EConvertError exception for Month = 0');
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateOutOfRangeDay;
+var
+  TempMethod: TTestLocalMethod;
 begin
-  try
-    EncodeDate(1,1,0);
-    Assert.Fail('EncodeDate failed to throw EConvertError exception for Day = 0');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeDate correctly threw an EConvertError exception for Day = 0');
-  end;
+  TempMethod := procedure begin EncodeDate(1,1,0) end;
+  Assert.WillRaise(TempMethod, EConvertError, 'EncodeDate failed to throw EConvertError exception for Day = 0');
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateDetectCorrectLeapYear;
+var
+  TempMethod: TTestLocalMethod;
 begin
-  try
-    EncodeDate(4,2,29);  // Year 4 is the first leap year
-    Assert.Pass('EncodeDate correctly allowed for Day = 29 for a leap year');
-  except
-    on EConvertError do
-      Assert.Fail('EncodeDate incorrectly threw an EConvertError exception for Day = 29 for a leap year');
-  end;
+  TempMethod := procedure begin EncodeDate(4,2,29) end;  // Year 4 is the first leap year
+  Assert.WillNotRaise(TempMethod, EConvertError, 'EncodeDate incorrectly allowed for Day = 29 for a leap year');
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateDetectIncorrectLeapYear;
+var
+  TempMethod: TTestLocalMethod;
 begin
-  try
-    EncodeDate(100,2,29);  // 100 is the first year divisible by 4 which is not a leap year
-    Assert.Fail('EncodeDate failed to throw EConvertError exception for Day = 29 for a non leap year');
-  except
-    on EConvertError do
-      Assert.Pass('EncodeDate correctly threw an EConvertError exception for Day = 29 for a non leap year');
-  end;
+  TempMethod := procedure begin EncodeDate(100,2,29) end;  // 100 is the first year divisible by 4 which is not a leap year
+  Assert.WillRaise(TempMethod, EConvertError, 'EncodeDate failed to throw EConvertError exception for Day = 29 for a non leap year');
 end;
+
 
 initialization
   TDUnitX.RegisterTestFixture(TSysUtilsCaseTests);
