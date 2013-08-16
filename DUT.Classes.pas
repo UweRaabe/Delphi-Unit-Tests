@@ -13,17 +13,12 @@ type
   private
     FListEnumerator : TListEnumerator;
     FList : TList;
-    Expected: string;
   public
     [Setup]
     procedure CreateListAndEnumerator;
     [Teardown]
     procedure DestroyListAndEnumerator;
 
-    [Test]
-    procedure TestListEnumerator_Create_NILListParameterAccepted;
-    [Test]
-    procedure TestListEnumerator_GetCurrent_ExceptionAsNeedToCallMoveNext;
     [Test]
     procedure TestListEnumerator_GetCurrent_GetsCurrent;
     [Test]
@@ -34,21 +29,13 @@ type
     procedure TestListEnumerator_MoveNext_ReturnsFalseOnReachingEndOfList;
     [Test]
     procedure TestListEnumerator_MoveNext_DoesNotPassEndOfList;
-    [Test]
-    procedure TestListEnumerator_MoveNext_ChangeTheListToASmallerSizeMakingTheIndexOutOfBounds;
-    [Test]
-    procedure TestListEnumerator_MoveNext_ChangeTheListToASmallerSizeThenCallMoveNext;
   end;
 
 implementation
 
 uses
-{$IFDEF VER220 }
-     SysUtils
-{$ELSE}
-     System.SysUtils
-{$ENDIF}
-   ;
+      System.SysUtils
+    ;
 
 { TClassesListEnumeratorTests }
 
@@ -69,28 +56,6 @@ begin
   inherited;
 end;
 
-procedure TClassesListEnumeratorTests.TestListEnumerator_Create_NILListParameterAccepted;
-var
-  enumerator : TListEnumerator;
-
-begin
-  enumerator := TListEnumerator.Create(NIL);
-  Assert.Pass( 'TListEnumerator is allowed a NIL TList parameter' );
-  enumerator.Free;
-end;
-
-procedure TClassesListEnumeratorTests.TestListEnumerator_GetCurrent_ExceptionAsNeedToCallMoveNext;
-begin
-  try
-    FListEnumerator.GetCurrent;
-  except
-    on E: Exception do
-      if E.Message = 'List index out of bounds (-1)' then
-        Assert.Pass( 'Calling GetCurrent before calling MoveNext causes an Access Violation' )
-      else
-        Assert.Fail;
-  end;
-end;
 
 procedure TClassesListEnumeratorTests.TestListEnumerator_GetCurrent_GetsCurrent;
 var
@@ -189,72 +154,6 @@ begin
   end;
 end;
 
-procedure TClassesListEnumeratorTests.TestListEnumerator_MoveNext_ChangeTheListToASmallerSizeMakingTheIndexOutOfBounds;
-var
-  item1 : TObject;
-  item2 : TObject;
-
-begin
-  item1 := TObject.Create;
-  item2 := TObject.Create;
-  try
-    FList.Add( item1 );
-    FList.Add( item2 );
-
-    FListEnumerator.MoveNext;
-    FListEnumerator.MoveNext;
-    Assert.AreSame( TObject( FListEnumerator.GetCurrent ), item2, 'The item returned in GetCurrent is not the one expected' );
-
-    // now change the list, by removing the second item
-    FList.Remove( item2 );
-    try
-      FListEnumerator.GetCurrent;
-    except
-      on E: Exception do
-        if E.Message = 'List index out of bounds (1)' then
-          Assert.Pass( 'Calling GetCurrent before calling MoveNext causes an Access Violation if the TList has become smaller than the current index' )
-        else
-          Assert.Fail;
-    end;
-  finally
-    item1.Free;
-    item2.Free;
-  end;
-end;
-
-procedure TClassesListEnumeratorTests.TestListEnumerator_MoveNext_ChangeTheListToASmallerSizeThenCallMoveNext;
-var
-  item1 : TObject;
-  item2 : TObject;
-
-begin
-  item1 := TObject.Create;
-  item2 := TObject.Create;
-  try
-    FList.Add( item1 );
-    FList.Add( item2 );
-
-    FListEnumerator.MoveNext;
-    FListEnumerator.MoveNext;
-    Assert.AreSame( TObject( FListEnumerator.GetCurrent ), item2, 'The item returned in GetCurrent is not the one expected' );
-
-    // now change the list, by removing the second item
-    FList.Remove( item2 );
-    FListEnumerator.MoveNext;
-    try
-      FListEnumerator.GetCurrent;
-    except
-      on E: Exception do
-        if E.Message = 'List index out of bounds (1)' then
-          Assert.Pass( 'Calling GetCurrent after calling MoveNext causes an Access Violation if the TList has become smaller than the current index' )
-        else
-          Assert.Fail;
-    end;
-  finally
-    item1.Free;
-    item2.Free;
-  end;
-end;
 
 
 initialization
