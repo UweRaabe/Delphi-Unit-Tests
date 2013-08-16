@@ -6,6 +6,7 @@ glob:*.~*
 glob:*.identcache
 glob:*.dof
 glob:*.dsk
+glob:*.rsm
 glob:*.bak
 glob:*.old
 glob:*.txaPackage
