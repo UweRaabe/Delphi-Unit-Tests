@@ -8,7 +8,13 @@ uses
      , SysUtils
      ;
 
+{
+DateUtils is pretty nicely divided up into groups of functions.  Let's try to
+create a TestFixture for each one.
+}
+
 type
+
   [TestFixture]
   TDateUtilsOfTests = class
   var
@@ -16,7 +22,6 @@ type
     [Setup]
     procedure Setup;
   public
-
     [Test]
     procedure TestDateOf;
     procedure TestTimeOf;
@@ -33,7 +38,7 @@ type
     [Test]
     procedure TestEncodeDateTimeOutOfRangeDay;
     [Test]
-    procedure TestEncodeDateTimeOutOfRangeHour;
+    procedure TestEncodeDateTimeOutOfRangeHour;  
     [Test]
     procedure TestEncodeDateTimeOutOfRangeMin;
     [Test]
@@ -48,6 +53,18 @@ type
     procedure TestEncodeDateTime;
   end;
 
+  [TestFixture]
+  TDateUtilsMiscFunctionTests = class
+  private
+    Input: TDateTime;
+    Expected: TDateTime;
+    Actual: TDateTime;
+  public
+    [Test]
+    procedure TestIsInLeapYearWithNormalDate;
+  end;
+
+  
 implementation
 
 { TDateUtilsOfTests }
@@ -79,14 +96,23 @@ begin
 end;
 
 
+
+{ TDateUtilsMiscFunctionTests }
+
+procedure TDateUtilsMiscFunctionTests.TestIsInLeapYearWithNormalDate;
+begin
+  Input := EncodeDate(1984, 6, 24); // Leap year
+  Assert.IsTrue(IsInLeapYear(Input), 'Is in year says a date in 1984 is not in a leap year');
+end;
+
 { TDateUtilsEncodeDateTimeTests }
 
 procedure TDateUtilsEncodeDateTimeTests.TestEncodeDateTimeDetectCorrectLeapYear;
 var
   TempMethod: TTestLocalMethod;
 begin
-  TempMethod := procedure begin EncodeDateTime(4,2,29,0,0,0,0) end;  // Year 4 is the first leap year
-  Assert.WillNotRaise(TempMethod, EConvertError, 'EncodeDateTime incorrectly allowed for Day = 29 for a leap year');
+  TempMethod := procedure begin EncodeDateTime(4,2,29,0,0,0,0) end;  // Year 4 is the first leap year  Assert.WillNotRaise(TempMethod, EConvertError, 'EncodeDateTime incorrectly allowed for Day = 29 for a leap year');
+
 end;
 
 procedure TDateUtilsEncodeDateTimeTests.TestEncodeDateTimeDetectIncorrectLeapYear;
@@ -172,5 +198,5 @@ end;
 initialization
   TDUnitX.RegisterTestFixture(TDateUtilsOfTests);
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDateTimeTests);
-
+  TDUnitX.RegisterTestFixture(TDateUtilsMiscFunctionTests);
 end.
