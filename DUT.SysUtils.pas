@@ -121,6 +121,14 @@ type
     procedure TestEncodeDate;
   end;
 
+type
+  [TestFixture]
+  TSysUtilsDateTimeToStrTests = class
+  public
+    [Test]
+    procedure TestDateTimeToStr;
+  end;
+
 implementation
 
 { TSysUtilsTests }
@@ -247,7 +255,6 @@ begin
   Assert.WillRaise(TempMethod, EConvertError, 'EncodeTime failed to throw EConvertError exception for Min = 60');
 end;
 
-
 procedure TSysUtilsEncodeTimeTests.TestEncodeTimeOutOfRangeSec;
 var
   TempMethod: TTestLocalMethod;
@@ -285,7 +292,7 @@ begin
   //
   // this test is NOT for out of range errors
   //
-  _time := EncodeTime(0,0,0,999); // 999 should be ignored by EncodeTime
+  _time := EncodeTime(0,0,0,999); // 999 should be ignored by TimeToStr
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
   Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), 'EncodeTime failed to encode 0:0:0');
@@ -361,6 +368,23 @@ begin
   Assert.WillRaise(TempMethod, EConvertError, 'EncodeDate failed to throw EConvertError exception for Day = 29 for a non leap year');
 end;
 
+{ TSysUtilsDateToStrTests }
+
+procedure TSysUtilsDateTimeToStrTests.TestDateTimeToStr;
+var
+  _date : TDateTime;
+  _format_settings : TFormatSettings;
+  Actual : String;
+begin
+  // if we a whole number - like 0 or 1 - DateTimeToStr does not return a time in the string
+  // if we use _date := 0, DateTimeToStr returns '12-30-1899'
+  _date := 0.5;
+  _format_settings.DateSeparator := '-';
+  _format_settings.ShortDateFormat := 'm-d-yyyy';
+  _format_settings.TimeSeparator := ':';
+  _format_settings.LongTimeFormat := 'h:m:s';
+  Assert.AreEqual('12-30-1899 12:0:0', DateTimeToStr(_date,_format_settings), 'DateTimeToStr failed to return 12-30-1899 12:0:0');
+end;
 
 initialization
   TDUnitX.RegisterTestFixture(TSysUtilsCaseTests);
@@ -371,5 +395,6 @@ initialization
   TDUnitX.RegisterTestFixture(TSysUtilsEncodeTimeTests);
   TDUnitX.RegisterTestFixture(TSysUtilsDateToStrTests);
   TDUnitX.RegisterTestFixture(TSysUtilsEncodeDateTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsDateTimeToStrTests);
 
 end.
