@@ -5,11 +5,11 @@ program DelphiUnitTestsProject;
 {$R *.res}
 
 uses
-  {$IFDEF VER220 }
-  SysUtils,
-  {$ELSE}
-  System.SysUtils,
-  {$ENDIF }
+  {$if CompilerVersion < 23 }
+    SysUtils,
+  {$else}
+    System.SysUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
+  {$ifend}
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Windows.Console,
@@ -35,10 +35,10 @@ begin
     //Run tests
     Results := Runner.Execute;
 
-    System.Writeln('Done.. press any key to quit.');
-    ReadLn;
+    System.Write('Done.. press the <Enter> key to quit.');
+    System.Readln;
   except
     on E: Exception do
-      Writeln(E.ClassName, ': ', E.Message);
+      System.Writeln(E.ClassName, ': ', E.Message);
   end;
 end.
