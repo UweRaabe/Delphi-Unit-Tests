@@ -3,13 +3,12 @@ unit DUT.SysUtils;
 interface
 
 uses
-     DUnitX.TestFramework
-{$IFDEF VER220 }
-   , SysUtils
-{$ELSE}
-   , System.SysUtils
-{$ENDIF}
-   ;
+  {$if CompilerVersion < 23 }
+    SysUtils,
+  {$else}
+    System.SysUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
+  {$ifend}
+  DUnitX.TestFramework;
 
 type
   [TestFixture]

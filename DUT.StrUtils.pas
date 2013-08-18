@@ -3,13 +3,12 @@ unit DUT.StrUtils;
 interface
 
 uses
-      DUnitX.TestFramework
-{$IFDEF VER220 }
-    , StrUtils
-{$ELSE}
-    , System.StrUtils
-{$ENDIF}
-    ;
+  {$if CompilerVersion < 23 }
+    StrUtils,
+  {$else}
+    System.StrUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
+  {$ifend}
+  DUnitX.TestFramework;
 
 type
   [TestFixture]
