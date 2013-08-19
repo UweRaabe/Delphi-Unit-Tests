@@ -8,6 +8,12 @@ uses
      , SysUtils
      ;
 
+{
+DateUtils is pretty nicely divided up into groups of functions.  Let's try to
+create a TestFixture for each one.
+}
+
+
 
 type
   [TestFixture]
@@ -20,7 +26,7 @@ type
     [Test]
     procedure TestEncodeDateTimeOutOfRangeDay;
     [Test]
-    procedure TestEncodeDateTimeOutOfRangeHour;
+    procedure TestEncodeDateTimeOutOfRangeHour;  
     [Test]
     procedure TestEncodeDateTimeOutOfRangeMin;
     [Test]
@@ -35,7 +41,36 @@ type
     procedure TestEncodeDateTime;
   end;
 
+  [TestFixture]
+  TDateUtilsMiscFunctionTests = class
+  private
+    Input: TDateTime;
+    Expected: TDateTime;
+    Actual: TDateTime;
+  public
+    [Test]
+    procedure TestIsInLeapYearWithNormalDate;
+    [Test]
+    procedure TestIsPMWithNormalDate;
+  end;
+
+  
 implementation
+
+
+{ TDateUtilsMiscFunctionTests }
+
+procedure TDateUtilsMiscFunctionTests.TestIsInLeapYearWithNormalDate;
+begin
+  Input := EncodeDate(1984, 6, 24); // Leap year
+  Assert.IsTrue(IsInLeapYear(Input), 'Is in year says a date in 1984 is not in a leap year');
+end;
+
+procedure TDateUtilsMiscFunctionTests.TestIsPMWithNormalDate;
+begin
+  Input := EncodeDateTime(1933, 6, 23, 23, 23, 23, 23);
+  Assert.IsTrue(IsPM(Input), 'IsPM says a date in the evening is not in the PM');
+end;
 
 { TDateUtilsEncodeDateTimeTests }
 
@@ -129,5 +164,5 @@ end;
 
 initialization
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDateTimeTests);
-
+  TDUnitX.RegisterTestFixture(TDateUtilsMiscFunctionTests);
 end.
