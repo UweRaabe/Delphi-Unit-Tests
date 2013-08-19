@@ -11,6 +11,7 @@ glob:*.dsk
 glob:*.rsm
 glob:*.bak
 glob:*.old
+glob:*.mes
 glob:*.txaPackage
 glob:*.tvsconfig
 glob:*.txvpck
