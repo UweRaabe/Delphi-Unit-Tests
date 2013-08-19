@@ -14,11 +14,12 @@ uses
   DUnitX.Loggers.Console,
   DUnitX.Loggers.XML.NUnit,
   DUnitX.Windows.Console,
-  DUT.SysUtils in 'DUT.SysUtils.pas',
-  DUT.StrUtils in 'DUT.StrUtils.pas',
-  DUT.Classes.TList.Enumerator in 'DUT.Classes.TList.Enumerator.pas',
-  DUT.DateUtils.Encode in 'DUT.DateUtils.Encode.pas',
-  DUT.DateUtils.DateOf in 'DUT.DateUtils.DateOf.pas';
+  DUT.Classes.TList.Enumerator in 'Tests\Classes\DUT.Classes.TList.Enumerator.pas',
+  DUT.DateUtils.DateOf in 'Tests\DateUtils\DUT.DateUtils.DateOf.pas',
+  DUT.DateUtils.Encode in 'Tests\DateUtils\DUT.DateUtils.Encode.pas',
+  DUT.StrUtils in 'Tests\StrUtils\DUT.StrUtils.pas',
+  DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
+  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas';
 
 var
   Runner: ITestRunner;
