@@ -62,6 +62,8 @@ type
   public
     [Test]
     procedure TestIsInLeapYearWithNormalDate;
+    [Test]
+    procedure TestIsPMWithNormalDate;
   end;
 
   
@@ -105,14 +107,20 @@ begin
   Assert.IsTrue(IsInLeapYear(Input), 'Is in year says a date in 1984 is not in a leap year');
 end;
 
+procedure TDateUtilsMiscFunctionTests.TestIsPMWithNormalDate;
+begin
+  Input := EncodeDateTime(1933, 6, 23, 23, 23, 23, 23);
+  Assert.IsTrue(IsPM(Input), 'IsPM says a date in the evening is not in the PM');
+end;
+
 { TDateUtilsEncodeDateTimeTests }
 
 procedure TDateUtilsEncodeDateTimeTests.TestEncodeDateTimeDetectCorrectLeapYear;
 var
   TempMethod: TTestLocalMethod;
 begin
-  TempMethod := procedure begin EncodeDateTime(4,2,29,0,0,0,0) end;  // Year 4 is the first leap year  Assert.WillNotRaise(TempMethod, EConvertError, 'EncodeDateTime incorrectly allowed for Day = 29 for a leap year');
-
+  TempMethod := procedure begin EncodeDateTime(4,2,29,0,0,0,0) end;  // Year 4 is the first leap year
+  Assert.WillNotRaise(TempMethod, EConvertError, 'EncodeDateTime incorrectly allowed for Day = 29 for a leap year');
 end;
 
 procedure TDateUtilsEncodeDateTimeTests.TestEncodeDateTimeDetectIncorrectLeapYear;
