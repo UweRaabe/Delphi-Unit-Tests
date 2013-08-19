@@ -1,11 +1,14 @@
-unit DUT.Classes;
+unit DUT.Classes.TList.Enumerator;
 
 interface
 
 uses
-     DUnitX.TestFramework
-   , System.Classes
-   ;
+  {$if CompilerVersion < 23 }
+    StrUtils,
+  {$else}
+    System.Classes, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
+  {$ifend}
+   DUnitX.TestFramework;
 
 type
   [TestFixture]
