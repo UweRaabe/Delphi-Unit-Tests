@@ -128,6 +128,38 @@ type
     procedure TestDateTimeToStr;
   end;
 
+type
+  [TestFixture]
+  TSysUtilsFalseBoolStrsTests = class
+  public
+    [Test]
+    procedure TestFalseBoolStrsInitWithBoolToStr;
+    [Test]
+    procedure TestFalseBoolStrsInitWithBoolToStrWithoutDefParams;
+    [Test]
+    procedure TestFalseBoolStrsInitWithStrToBool;
+    [Test]
+    procedure TestFalseBoolStrsInitWithTryStrToBool;
+    [Test]
+    procedure TestFalseBoolStrs;
+  end;
+
+type
+  [TestFixture]
+  TSysUtilsTrueBoolStrsTests = class
+  public
+    [Test]
+    procedure TestTrueBoolStrsInitWithBoolToStr;
+    [Test]
+    procedure TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
+    [Test]
+    procedure TestTrueBoolStrsInitWithStrToBool;
+    [Test]
+    procedure TestTrueBoolStrsInitWithTryStrToBool;
+    [Test]
+    procedure TestTrueBoolStrs;
+  end;
+
 implementation
 
 { TSysUtilsTests }
@@ -385,6 +417,94 @@ begin
   Assert.AreEqual('12-30-1899 12:0:0', DateTimeToStr(_date,_format_settings), 'DateTimeToStr failed to return 12-30-1899 12:0:0');
 end;
 
+{ TSysUtilsFalseBoolStrsTests }
+
+procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStr;
+begin
+  FalseBoolStrs := Nil;
+  BoolToStr(False);
+  // this Assert causes an access violation as BoolToStr does not initialize
+  // FalseBoolStrs[0] with 'False' as documented
+  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+end;
+
+procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStrWithoutDefParams;
+begin
+  FalseBoolStrs := Nil;
+  BoolToStr(False,True); // default of arg2 is False - passing True initializes FalseBoolStrs (and TrueBoolStrs)
+  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+end;
+
+procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithStrToBool;
+begin
+  FalseBoolStrs := Nil;
+  StrToBool('0');
+  // this Assert causes an access violation as StrToBool does not initialize
+  // FalseBoolStrs[0] with 'False' as documented
+  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+end;
+
+procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithTryStrToBool;
+var
+  _val : Boolean;
+begin
+  FalseBoolStrs := Nil;
+  TryStrToBool('0',_val);
+  // this Assert causes an access violation as TryStrToBool does not initialize
+  // FalseBoolStrs[0] with 'False' as documented
+  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+end;
+
+procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrs;
+begin
+  // this test should be run before FalseBoolStrs is ever used
+  Assert.IsTrue(Length(FalseBoolStrs) = 0, 'FalseBoolStrs should be empty on initialization');
+end;
+
+{ TSysUtilsTrueBoolStrsTests }
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStr;
+begin
+  TrueBoolStrs := Nil;
+  BoolToStr(True);
+  // this Assert causes an access violation as BoolToStr does not initialize
+  // TrueBoolStrs[0] with 'True' as documented
+  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
+begin
+  TrueBoolStrs := Nil;
+  BoolToStr(True,True); // default of arg2 is False - passing True initializes TrueBoolStrs (and FalseBoolStrs)
+  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithStrToBool;
+begin
+  TrueBoolStrs := Nil;
+  StrToBool('1');
+  // this Assert causes an access violation as StrToBool does not initialize
+  // TrueBoolStrs[0] with 'True' as documented
+  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithTryStrToBool;
+var
+  _val : Boolean;
+begin
+  TrueBoolStrs := Nil;
+  TryStrToBool('1',_val);
+  // this Assert causes an access violation as TryStrToBool does not initialize
+  // TrueBoolStrs[0] with 'True' as documented
+  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrs;
+begin
+  // this test should be run before TrueBoolStrs is ever used
+  Assert.IsTrue(Length(TrueBoolStrs) = 0, 'TrueBoolStrs should be empty on initialization');
+end;
+
 initialization
   TDUnitX.RegisterTestFixture(TSysUtilsCaseTests);
   TDUnitX.RegisterTestFixture(TSysUtilsCompareStrTests);
@@ -395,5 +515,7 @@ initialization
   TDUnitX.RegisterTestFixture(TSysUtilsDateToStrTests);
   TDUnitX.RegisterTestFixture(TSysUtilsEncodeDateTests);
   TDUnitX.RegisterTestFixture(TSysUtilsDateTimeToStrTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsFalseBoolStrsTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsTrueBoolStrsTests);
 
 end.
