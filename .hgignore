@@ -17,6 +17,7 @@ glob:*.txvpck
 glob:Test/HTMLWriterTestAppTests.xml
 glob:*.dcp
 glob:out/**
+glob:Reports/**
 glob:CreateFileToUpload.bat
 glob:send2goog
 glob:*.ico
