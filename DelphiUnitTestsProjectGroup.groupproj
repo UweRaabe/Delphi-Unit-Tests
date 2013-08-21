@@ -6,7 +6,7 @@
         <Projects Include="DelphiUnitTestsProject.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj">
+        <Projects Include="DelphiUnitTestsFAILURES.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -27,13 +27,13 @@
         <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Make"/>
     </Target>
     <Target Name="DelphiUnitTestsFAILURES">
-        <MSBuild Projects="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj"/>
+        <MSBuild Projects="DelphiUnitTestsFAILURES.dproj"/>
     </Target>
     <Target Name="DelphiUnitTestsFAILURES:Clean">
-        <MSBuild Projects="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj" Targets="Clean"/>
+        <MSBuild Projects="DelphiUnitTestsFAILURES.dproj" Targets="Clean"/>
     </Target>
     <Target Name="DelphiUnitTestsFAILURES:Make">
-        <MSBuild Projects="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj" Targets="Make"/>
+        <MSBuild Projects="DelphiUnitTestsFAILURES.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="DelphiUnitTestsProject;DelphiUnitTestsFAILURES"/>

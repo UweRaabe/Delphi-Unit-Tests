@@ -1,4 +1,4 @@
-program DelphiUnitTestsProject;
+program DelphiUnitTestsFAILURES;
 
 {$APPTYPE CONSOLE}
 
@@ -13,16 +13,7 @@ uses
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Loggers.XML.NUnit,
-  DUnitX.Windows.Console,
-  DUT.Classes.TList.Enumerator in 'Tests\Classes\DUT.Classes.TList.Enumerator.pas',
-  DUT.DateUtils.DateOf in 'Tests\DateUtils\DUT.DateUtils.DateOf.pas',
-  DUT.DateUtils.Encode in 'Tests\DateUtils\DUT.DateUtils.Encode.pas',
-  DUT.StrUtils in 'Tests\StrUtils\DUT.StrUtils.pas',
-  DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
-  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas',
-  DUT.DateUtils.MiscFunctions in 'Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas',
-  DUT.SysUtils.QC108975 in 'Tests\SysUtils\DUT.SysUtils.QC108975.pas',
-  DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas';
+  DUnitX.Windows.Console;
 
 var
   Runner: ITestRunner;
@@ -63,4 +54,5 @@ begin
     on E: Exception do
       System.Writeln(E.ClassName, ': ', E.Message);
   end;
+end.
 end.
