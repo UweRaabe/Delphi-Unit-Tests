@@ -19,7 +19,8 @@ uses
   DUT.DateUtils.Encode in 'Tests\DateUtils\DUT.DateUtils.Encode.pas',
   DUT.StrUtils in 'Tests\StrUtils\DUT.StrUtils.pas',
   DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
-  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas';
+  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas',
+  DUT.DateUtils.MiscFunctions in 'Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas';
 
 var
   Runner: ITestRunner;
