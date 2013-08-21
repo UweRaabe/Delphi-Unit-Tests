@@ -19,6 +19,8 @@ uses
   DUT.DateUtils.Encode in 'Tests\DateUtils\DUT.DateUtils.Encode.pas',
   DUT.StrUtils in 'Tests\StrUtils\DUT.StrUtils.pas',
   DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
+  DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas',
+  DUT.SysUtils.QC108975 in 'Tests\SysUtils\DUT.SysUtils.QC108975.pas',
   DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas';
 
 var
