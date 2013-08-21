@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AAC1616D-0F20-4440-AA27-842B496B484C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DelphiUnitTestsProject.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DelphiUnitTestsProject">
+        <MSBuild Projects="DelphiUnitTestsProject.dproj"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject:Clean">
+        <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject:Make">
+        <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DelphiUnitTestsFAILURES">
+        <MSBuild Projects="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj"/>
+    </Target>
+    <Target Name="DelphiUnitTestsFAILURES:Clean">
+        <MSBuild Projects="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiUnitTestsFAILURES:Make">
+        <MSBuild Projects="C:\Users\Nick\Documents\RAD Studio\Projects\DelphiUnitTestsFAILURES.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DelphiUnitTestsProject;DelphiUnitTestsFAILURES"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DelphiUnitTestsProject:Clean;DelphiUnitTestsFAILURES:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DelphiUnitTestsProject:Make;DelphiUnitTestsFAILURES:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
