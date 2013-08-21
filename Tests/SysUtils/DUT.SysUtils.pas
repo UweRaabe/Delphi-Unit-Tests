@@ -131,7 +131,11 @@ type
 type
   [TestFixture]
   TSysUtilsFalseBoolStrsTests = class
+  private
+    Expected, Actual: string;
   public
+    [Setup]
+    procedure Setup;
     [Test]
     procedure TestFalseBoolStrsInitWithBoolToStr;
     [Test]
@@ -147,7 +151,11 @@ type
 type
   [TestFixture]
   TSysUtilsTrueBoolStrsTests = class
+  private
+    Expected, Actual: string;
   public
+    [Setup]
+    procedure Setup;
     [Test]
     procedure TestTrueBoolStrsInitWithBoolToStr;
     [Test]
@@ -405,7 +413,6 @@ procedure TSysUtilsDateTimeToStrTests.TestDateTimeToStr;
 var
   _date : TDateTime;
   _format_settings : TFormatSettings;
-  Actual : String;
 begin
   // if we a whole number - like 0 or 1 - DateTimeToStr does not return a time in the string
   // if we use _date := 0, DateTimeToStr returns '12-30-1899'
@@ -419,29 +426,39 @@ end;
 
 { TSysUtilsFalseBoolStrsTests }
 
+procedure TSysUtilsFalseBoolStrsTests.Setup;
+begin
+  Expected := 'False';
+end;
+
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStr;
 begin
   FalseBoolStrs := Nil;
+  Actual := '';
   BoolToStr(False);
-  // this Assert causes an access violation as BoolToStr does not initialize
-  // FalseBoolStrs[0] with 'False' as documented
-  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+  if Length(FalseBoolStrs) > 0 then
+    Actual := FalseBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStrWithoutDefParams;
 begin
   FalseBoolStrs := Nil;
+  Actual := '';
   BoolToStr(False,True); // default of arg2 is False - passing True initializes FalseBoolStrs (and TrueBoolStrs)
-  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+  if Length(FalseBoolStrs) > 0 then
+    Actual := FalseBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithStrToBool;
 begin
   FalseBoolStrs := Nil;
+  Actual := '';
   StrToBool('0');
-  // this Assert causes an access violation as StrToBool does not initialize
-  // FalseBoolStrs[0] with 'False' as documented
-  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+  if Length(FalseBoolStrs) > 0 then
+    Actual := FalseBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithTryStrToBool;
@@ -449,10 +466,11 @@ var
   _val : Boolean;
 begin
   FalseBoolStrs := Nil;
+  Actual := '';
   TryStrToBool('0',_val);
-  // this Assert causes an access violation as TryStrToBool does not initialize
-  // FalseBoolStrs[0] with 'False' as documented
-  Assert.AreEqual('False', FalseBoolStrs[0], 'FalseBoolStrs[0] should be the string False');
+  if Length(FalseBoolStrs) > 0 then
+    Actual := FalseBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrs;
@@ -463,29 +481,39 @@ end;
 
 { TSysUtilsTrueBoolStrsTests }
 
+procedure TSysUtilsTrueBoolStrsTests.Setup;
+begin
+  Expected := 'True';
+end;
+
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStr;
 begin
   TrueBoolStrs := Nil;
+  Actual := '';
   BoolToStr(True);
-  // this Assert causes an access violation as BoolToStr does not initialize
-  // TrueBoolStrs[0] with 'True' as documented
-  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
 begin
   TrueBoolStrs := Nil;
+  Actual := '';
   BoolToStr(True,True); // default of arg2 is False - passing True initializes TrueBoolStrs (and FalseBoolStrs)
-  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithStrToBool;
 begin
   TrueBoolStrs := Nil;
+  Actual := '';
   StrToBool('1');
-  // this Assert causes an access violation as StrToBool does not initialize
-  // TrueBoolStrs[0] with 'True' as documented
-  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithTryStrToBool;
@@ -493,10 +521,11 @@ var
   _val : Boolean;
 begin
   TrueBoolStrs := Nil;
+  Actual := '';
   TryStrToBool('1',_val);
-  // this Assert causes an access violation as TryStrToBool does not initialize
-  // TrueBoolStrs[0] with 'True' as documented
-  Assert.AreEqual('True', TrueBoolStrs[0], 'TrueBoolStrs[0] should be the string True');
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrs;
