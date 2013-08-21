@@ -8,6 +8,12 @@ uses
      , SysUtils
      ;
 
+{
+DateUtils is pretty nicely divided up into groups of functions.  Let's try to
+create a TestFixture for each one.
+}
+
+
 
 type
   [TestFixture]
@@ -20,7 +26,7 @@ type
     [Test]
     procedure TestEncodeDateTimeOutOfRangeDay;
     [Test]
-    procedure TestEncodeDateTimeOutOfRangeHour;
+    procedure TestEncodeDateTimeOutOfRangeHour;  
     [Test]
     procedure TestEncodeDateTimeOutOfRangeMin;
     [Test]
@@ -35,6 +41,7 @@ type
     procedure TestEncodeDateTime;
   end;
 
+  
 implementation
 
 { TDateUtilsEncodeDateTimeTests }
@@ -129,5 +136,4 @@ end;
 
 initialization
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDateTimeTests);
-
 end.
