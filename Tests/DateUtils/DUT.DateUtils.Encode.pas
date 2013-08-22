@@ -3,17 +3,19 @@ unit DUT.DateUtils.Encode;
 interface
 
 uses
-       DUnitX.TestFramework
-     , DateUtils
-     , SysUtils
-     ;
+  {$if CompilerVersion < 23 }
+    DateUtils,
+    SysUtils,
+  {$else}
+    System.DateUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
+    System.SysUtils,
+  {$ifend}
+   DUnitX.TestFramework;
 
 {
 DateUtils is pretty nicely divided up into groups of functions.  Let's try to
 create a TestFixture for each one.
 }
-
-
 
 type
   [TestFixture]
