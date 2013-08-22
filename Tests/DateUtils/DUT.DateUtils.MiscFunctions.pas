@@ -3,9 +3,14 @@ unit DUT.DateUtils.MiscFunctions;
 interface
 
 uses
-      DUnitX.TestFramework
-    ;
-
+  {$if CompilerVersion < 23 }
+    DateUtils,
+    SysUtils,
+  {$else}
+    System.DateUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
+    System.SysUtils,
+  {$ifend}
+   DUnitX.TestFramework;
 
 type
   [TestFixture]
@@ -22,17 +27,6 @@ type
   end;
 
 implementation
-
-uses
-  {$if CompilerVersion < 23 }
-    DateUtils,
-    SysUtils,
-  {$else}
-    System.DateUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-    System.SysUtils
-    ;
-  {$ifend}
-
 
 { TDateUtilsMiscFunctionTests }
 
