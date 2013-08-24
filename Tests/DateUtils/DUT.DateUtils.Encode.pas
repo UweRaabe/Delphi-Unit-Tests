@@ -381,12 +381,12 @@ begin
   //
   // from the XE4 documentation
   //
-  // if the first calendar day of the month is a Friday, Saturday, or Sunday,
-  // then those three days must be expressed using AMonth set to the previous
-  // month and AWeekOfMonth set to the number of weeks in the previous month
+  // Note that if the first calendar day of the year is a Friday, Saturday,
+  // or Sunday, then those three days must be expressed using AYear set to the
+  // previous year and AWeekOfYear set to the number of weeks in the previous year.
   //
-  // September 1, 1933 is a Friday so asking for the date of the Friday in the
-  // last week of August should return September 1
+  // January 1, 1933 is a Sunday so that is the value that should be returned
+  // when asking for the Sunday in the first week of 1932
   //
   _date := EncodeDateWeek(1932, 52, DaySunday);
   _format_settings.DateSeparator := '-';
@@ -403,17 +403,17 @@ begin
   //
   // from the XE4 documentation
   //
-  // if the last calendar day of the month is a Monday, Tuesday, or Wednesday,
-  // then those three days are expressed with AMonth set to the following month
-  // and AWeekOfMonth set to 1
+  // if the last calendar day of the year is a Monday, Tuesday, or Wednesday,
+  // then those three days are expressed with AYear set to the following year
+  // and AWeekOfYear set to 1.
   //
-  // July 31, 1933 is a Monday so asking for the date of the Monday in the
-  // first week of August should return July 31
+  // December 31, 1934 is a Monday so that is the value that should be returned
+  // when asking for the first Monday in the first week of 1935
   //
-  _date := EncodeDateWeek(1933, 1, DayMonday);
+  _date := EncodeDateWeek(1935, 1, DayMonday);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('1-2-1933', DateTimeToStr(_date, _format_settings),
+  Assert.AreEqual('12-31-1934', DateTimeToStr(_date, _format_settings),
     'EncodeDateDay failed to encode 1-2-1933');
 end;
 
