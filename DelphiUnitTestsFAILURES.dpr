@@ -13,7 +13,8 @@ uses
   DUnitX.TestFramework,
   DUnitX.Loggers.Console,
   DUnitX.Loggers.XML.NUnit,
-  DUnitX.Windows.Console;
+  DUnitX.Windows.Console,
+  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas';
 
 var
   Runner: ITestRunner;
