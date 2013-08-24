@@ -19,7 +19,6 @@ uses
   DUT.DateUtils.Encode in 'Tests\DateUtils\DUT.DateUtils.Encode.pas',
   DUT.StrUtils in 'Tests\StrUtils\DUT.StrUtils.pas',
   DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
-  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas',
   DUT.DateUtils.MiscFunctions in 'Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas',
   DUT.SysUtils.QC108975 in 'Tests\SysUtils\DUT.SysUtils.QC108975.pas',
   DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas';
