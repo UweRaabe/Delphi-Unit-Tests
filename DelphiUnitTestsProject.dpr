@@ -21,7 +21,8 @@ uses
   DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
   DUT.DateUtils.MiscFunctions in 'Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas',
   DUT.SysUtils.QC108975 in 'Tests\SysUtils\DUT.SysUtils.QC108975.pas',
-  DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas';
+  DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas',
+  DUT.SysUtils.BoolStrTests in 'Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas';
 
 var
   Runner: ITestRunner;
