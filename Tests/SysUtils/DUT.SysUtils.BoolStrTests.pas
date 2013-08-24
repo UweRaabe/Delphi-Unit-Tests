@@ -31,6 +31,25 @@ type
     procedure TestFalseBoolStrs;
   end;
 
+type
+  [TestFixture]
+  TSysUtilsTrueBoolStrsTests = class
+  private
+    Expected, Actual: string;
+  public
+    [Setup]
+    procedure Setup;
+    [Test]
+    procedure TestTrueBoolStrsInitWithBoolToStr;
+    [Test]
+    procedure TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
+    [Test]
+    procedure TestTrueBoolStrsInitWithStrToBool;
+    [Test]
+    procedure TestTrueBoolStrsInitWithTryStrToBool;
+    [Test]
+    procedure TestTrueBoolStrs;
+  end;
 
 implementation
 
@@ -89,7 +108,63 @@ begin
   Assert.IsTrue(Length(FalseBoolStrs) = 0, 'FalseBoolStrs should be empty on initialization');
 end;
 
+{ TSysUtilsTrueBoolStrsTests }
+
+procedure TSysUtilsTrueBoolStrsTests.Setup;
+begin
+  Expected := 'True';
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStr;
+begin
+  TrueBoolStrs := Nil;
+  Actual := '';
+  BoolToStr(True);
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
+begin
+  TrueBoolStrs := Nil;
+  Actual := '';
+  BoolToStr(True,True); // default of arg2 is False - passing True initializes TrueBoolStrs (and FalseBoolStrs)
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithStrToBool;
+begin
+  TrueBoolStrs := Nil;
+  Actual := '';
+  StrToBool('1');
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithTryStrToBool;
+var
+  _val : Boolean;
+begin
+  TrueBoolStrs := Nil;
+  Actual := '';
+  TryStrToBool('1',_val);
+  if Length(TrueBoolStrs) > 0 then
+    Actual := TrueBoolStrs[0];
+  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+end;
+
+procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrs;
+begin
+  // this test should be run before TrueBoolStrs is ever used
+  Assert.IsTrue(Length(TrueBoolStrs) = 0, 'TrueBoolStrs should be empty on initialization');
+end;
+
 initialization
   TDUnitX.RegisterTestFixture(TSysUtilsFalseBoolStrsTests);
+  TDUnitX.RegisterTestFixture(TSysUtilsTrueBoolStrsTests);
 
 end.
