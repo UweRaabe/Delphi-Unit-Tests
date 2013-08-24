@@ -386,7 +386,7 @@ begin
   // previous year and AWeekOfYear set to the number of weeks in the previous year.
   //
   // January 1, 1933 is a Sunday so that is the value that should be returned
-  // when asking for the Sunday in the first week of 1932
+  // when asking for the Sunday in the last week of 1932
   //
   _date := EncodeDateWeek(1932, 52, DaySunday);
   _format_settings.DateSeparator := '-';
@@ -414,7 +414,7 @@ begin
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   Assert.AreEqual('12-31-1934', DateTimeToStr(_date, _format_settings),
-    'EncodeDateDay failed to encode 1-2-1933');
+    'EncodeDateDay failed to encode 12-31-1934');
 end;
 
 procedure TDateUtilsEncodeDateWeekTests.TestEncodeDateWeek;
