@@ -137,7 +137,7 @@ end;
 procedure TDateUtilsMiscFunctionTests.TestIsTodayWithNotToday;
 begin
   Input := 0;
-  Assert.IsFalse(IsToday(Input), 'IsToday says 12/30/1899 is not the current date');
+  Assert.IsFalse(IsToday(Input), 'IsToday says 12/30/1899 is the current date');
 end;
 
 procedure TDateUtilsMiscFunctionTests.TestIsTodayWithToday;
