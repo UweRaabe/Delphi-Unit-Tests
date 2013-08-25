@@ -3,10 +3,10 @@
         <ProjectGuid>{AAC1616D-0F20-4440-AA27-842B496B484C}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="DelphiUnitTestsProject.dproj">
+        <Projects Include="DelphiUnitTestsFAILURES.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="DelphiUnitTestsFAILURES.dproj">
+        <Projects Include="DelphiUnitTestsProject.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -17,15 +17,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="DelphiUnitTestsProject">
-        <MSBuild Projects="DelphiUnitTestsProject.dproj"/>
-    </Target>
-    <Target Name="DelphiUnitTestsProject:Clean">
-        <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="DelphiUnitTestsProject:Make">
-        <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Make"/>
-    </Target>
     <Target Name="DelphiUnitTestsFAILURES">
         <MSBuild Projects="DelphiUnitTestsFAILURES.dproj"/>
     </Target>
@@ -35,14 +26,23 @@
     <Target Name="DelphiUnitTestsFAILURES:Make">
         <MSBuild Projects="DelphiUnitTestsFAILURES.dproj" Targets="Make"/>
     </Target>
+    <Target Name="DelphiUnitTestsProject">
+        <MSBuild Projects="DelphiUnitTestsProject.dproj"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject:Clean">
+        <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject:Make">
+        <MSBuild Projects="DelphiUnitTestsProject.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="DelphiUnitTestsProject;DelphiUnitTestsFAILURES"/>
+        <CallTarget Targets="DelphiUnitTestsFAILURES;DelphiUnitTestsProject"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="DelphiUnitTestsProject:Clean;DelphiUnitTestsFAILURES:Clean"/>
+        <CallTarget Targets="DelphiUnitTestsFAILURES:Clean;DelphiUnitTestsProject:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="DelphiUnitTestsProject:Make;DelphiUnitTestsFAILURES:Make"/>
+        <CallTarget Targets="DelphiUnitTestsFAILURES:Make;DelphiUnitTestsProject:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
