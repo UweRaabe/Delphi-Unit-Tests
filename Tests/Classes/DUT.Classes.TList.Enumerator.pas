@@ -4,7 +4,7 @@ interface
 
 uses
   {$if CompilerVersion < 23 }
-    StrUtils,
+    Classes,
   {$else}
     System.Classes, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
   {$ifend}
@@ -37,8 +37,11 @@ type
 implementation
 
 uses
-      System.SysUtils
-    ;
+  {$if CompilerVersion < 23 }
+  SysUtils;
+  {$else}
+  System.SysUtils;
+  {$ifend}
 
 { TClassesListEnumeratorTests }
 
