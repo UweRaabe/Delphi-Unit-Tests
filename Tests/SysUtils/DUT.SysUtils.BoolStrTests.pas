@@ -67,7 +67,7 @@ begin
   BoolToStr(False);
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual, True, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStrWithoutDefParams;
@@ -87,7 +87,7 @@ begin
   StrToBool('0');
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual, True, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithTryStrToBool;
@@ -99,7 +99,7 @@ begin
   TryStrToBool('0',_val);
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual, True, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrs;
@@ -122,7 +122,7 @@ begin
   BoolToStr(True);
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
@@ -132,7 +132,7 @@ begin
   BoolToStr(True,True); // default of arg2 is False - passing True initializes TrueBoolStrs (and FalseBoolStrs)
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithStrToBool;
@@ -142,7 +142,7 @@ begin
   StrToBool('1');
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithTryStrToBool;
@@ -154,7 +154,7 @@ begin
   TryStrToBool('1',_val);
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrs;
