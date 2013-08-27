@@ -12,8 +12,7 @@ uses
   {$ifend}
    DUnitX.TestFramework;
 
-
-type
+type
   [TestFixture]
   TDateUtilsOfTests = class
   var
@@ -55,7 +54,6 @@ begin
   Expected := EncodeTime(3, 4, 5, 6);
   Actual := TimeOf(Input);
   Assert.AreEqual(Expected, Actual);
-
 end;
 
 initialization
