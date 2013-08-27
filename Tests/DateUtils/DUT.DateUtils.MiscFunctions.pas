@@ -26,11 +26,10 @@ implementation
 uses
   {$if CompilerVersion < 23 }
     DateUtils,
-    SysUtils,
+    SysUtils;
   {$else}
     System.DateUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-    System.SysUtils
-    ;
+    System.SysUtils;
   {$ifend}
 
 

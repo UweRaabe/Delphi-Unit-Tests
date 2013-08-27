@@ -131,7 +131,7 @@ begin
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('1-2-1944 3:4:5', DateTimeToStr(_date,_format_settings), 'EncodeDate failed to encode 1-2-1944 3:4:5');
+  Assert.AreEqual('1-2-1944 3:4:5', DateTimeToStr(_date,_format_settings),true, 'EncodeDate failed to encode 1-2-1944 3:4:5');
 end;
 
 initialization

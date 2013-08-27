@@ -38,7 +38,7 @@ begin
     Runner := TDUnitX.CreateRunner;
     Runner.UseRTTI := True;
     //tell the runner how we will log things
-    Logger := TDUnitXConsoleLogger.Create(true);
+    Logger := TDUnitXConsoleLogger.Create;
     runner.AddLogger(Logger);
 
     {$IFDEF CI}
