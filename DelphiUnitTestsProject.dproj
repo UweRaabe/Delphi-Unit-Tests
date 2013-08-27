@@ -70,10 +70,10 @@
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.Encode.pas"/>
         <DCCReference Include="Tests\StrUtils\DUT.StrUtils.pas"/>
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.pas"/>
-        <DCCReference Include="Tests\Examples\DUT.Examples.TStringList.QC12345.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas"/>
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC108975.pas"/>
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC109207.pas"/>
+        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
