@@ -176,42 +176,42 @@ procedure TSysUtilsCaseTests.TestLowerCaseWithAllLowerCase;
 begin
   Expected := 'lower';
   Actual := LowerCase('lower');
-  Assert.AreEqual(Expected, Actual, 'LowerCase starting with all lower case failed');
+  Assert.AreEqual(Expected, Actual, false, 'LowerCase starting with all lower case failed');
 end;
 
 procedure TSysUtilsCaseTests.TestLowerCaseWithAllUpperCase;
 begin
   Expected := 'lower';
   Actual := LowerCase('LOWER');
-  Assert.AreEqual(Expected, Actual, 'LowerCase starting with all upper case failed');
+  Assert.AreEqual(Expected, Actual, false, 'LowerCase starting with all upper case failed');
 end;
 
 procedure TSysUtilsCaseTests.TestLowerCaseWithMixedCase;
 begin
   Expected := 'lower';
   Actual := LowerCase('LoWeR');
-  Assert.AreEqual(Expected, Actual, 'LowerCase with mixed case input failed');
+  Assert.AreEqual(Expected, Actual, false, 'LowerCase with mixed case input failed');
 end;
 
 procedure TSysUtilsCaseTests.TestUpperCaseWithAllUpperCase;
 begin
   Expected := 'UPPER';
   Actual := UpperCase('UPPER');
-  Assert.AreEqual(Expected, Actual, 'UpperCase with already upper case input failed');
+  Assert.AreEqual(Expected, Actual, false, 'UpperCase with already upper case input failed');
 end;
 
 procedure TSysUtilsCaseTests.TestUpperCaseWithAllLowerCase;
 begin
   Expected := 'UPPER';
   Actual := UpperCase('upper');
-  Assert.AreEqual(Expected, Actual, 'UpperCase with all lower case input failed');
+  Assert.AreEqual(Expected, Actual, false, 'UpperCase with all lower case input failed');
 end;
 
 procedure TSysUtilsCaseTests.TestUpperCaseWithMixedCase;
 begin
   Expected := 'UPPER';
   Actual := UpperCase('uPpEr');
-  Assert.AreEqual(Expected, Actual, 'UpperCase with mixed case input failed');
+  Assert.AreEqual(Expected, Actual, false, 'UpperCase with mixed case input failed');
 end;
 
 
@@ -318,7 +318,7 @@ begin
   _time := 0;
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), 'TimeToStr failed to return 0:0:0');
+  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings),true, 'TimeToStr failed to return 0:0:0');
 end;
 
 { TSysUtilsEncodeTimeTests }
@@ -334,7 +334,7 @@ begin
   _time := EncodeTime(0,0,0,999); // 999 should be ignored by TimeToStr
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), 'EncodeTime failed to encode 0:0:0');
+  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings),true, 'EncodeTime failed to encode 0:0:0');
 end;
 
 
@@ -348,7 +348,7 @@ begin
   _date := 0;
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('12-30-1899', DateToStr(_date,_format_settings), 'DateToStr failed to return 12-30-1899');
+  Assert.AreEqual('12-30-1899', DateToStr(_date,_format_settings),true, 'DateToStr failed to return 12-30-1899');
 end;
 
 { TSysUtilsEncodeDateTests }
@@ -364,7 +364,7 @@ begin
   _date := EncodeDate(1970,1,1);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('1-1-1970', DateToStr(_date,_format_settings), 'EncodeDate failed to encode 1-1-1970');
+  Assert.AreEqual('1-1-1970', DateToStr(_date,_format_settings),true, 'EncodeDate failed to encode 1-1-1970');
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateOutOfRangeYear;
@@ -421,7 +421,7 @@ begin
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('12-30-1899 12:0:0', DateTimeToStr(_date,_format_settings), 'DateTimeToStr failed to return 12-30-1899 12:0:0');
+  Assert.AreEqual('12-30-1899 12:0:0', DateTimeToStr(_date,_format_settings),true, 'DateTimeToStr failed to return 12-30-1899 12:0:0');
 end;
 
 { TSysUtilsFalseBoolStrsTests }
@@ -438,7 +438,7 @@ begin
   BoolToStr(False);
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual,false, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStrWithoutDefParams;
@@ -448,7 +448,7 @@ begin
   BoolToStr(False,True); // default of arg2 is False - passing True initializes FalseBoolStrs (and TrueBoolStrs)
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual,false, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithStrToBool;
@@ -458,7 +458,7 @@ begin
   StrToBool('0');
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual, false, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithTryStrToBool;
@@ -470,13 +470,13 @@ begin
   TryStrToBool('0',_val);
   if Length(FalseBoolStrs) > 0 then
     Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'FalseBoolStrs[0] should be the string False');
+  Assert.AreEqual(Expected, Actual,false, 'FalseBoolStrs[0] should be the string False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrs;
 begin
   // this test should be run before FalseBoolStrs is ever used
-  Assert.IsTrue(Length(FalseBoolStrs) = 0, 'FalseBoolStrs should be empty on initialization');
+  Assert.IsTrue(Length(FalseBoolStrs) = 0,  'FalseBoolStrs should be empty on initialization');
 end;
 
 { TSysUtilsTrueBoolStrsTests }
@@ -493,7 +493,7 @@ begin
   BoolToStr(True);
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual,false, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
@@ -503,7 +503,7 @@ begin
   BoolToStr(True,True); // default of arg2 is False - passing True initializes TrueBoolStrs (and FalseBoolStrs)
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual,false, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithStrToBool;
@@ -513,7 +513,7 @@ begin
   StrToBool('1');
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual,false, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithTryStrToBool;
@@ -525,7 +525,7 @@ begin
   TryStrToBool('1',_val);
   if Length(TrueBoolStrs) > 0 then
     Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, 'TrueBoolStrs[0] should be the string True');
+  Assert.AreEqual(Expected, Actual,false, 'TrueBoolStrs[0] should be the string True');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrs;
