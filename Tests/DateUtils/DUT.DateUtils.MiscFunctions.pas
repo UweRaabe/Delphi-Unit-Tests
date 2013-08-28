@@ -37,8 +37,6 @@ type
     [Test]
     procedure TestIncYear;
     [Test]
-    procedure TestIsAMWithNormalDate;
-    [Test]
     procedure TestIsInLeapYearWithNormalDate;
     [Test]
     procedure TestIsPMWithNormalDate;
@@ -114,12 +112,6 @@ begin
   Input := 0;
   Actual := IncYear(Input, 1);
   Assert.AreEqual(DateTimeToStr(Expected), DateTimeToStr(Actual), True, 'IncYear did not add 1 year');
-end;
-
-procedure TDateUtilsMiscFunctionTests.TestIsAMWithNormalDate;
-begin
-  Input := EncodeDateTime(1933, 6, 23, 0, 23, 23, 23);
-  Assert.IsTrue(IsAM(Input), 'IsAM says a date in the evening is not in the AM');
 end;
 
 procedure TDateUtilsMiscFunctionTests.TestIsInLeapYearWithNormalDate;
