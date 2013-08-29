@@ -304,14 +304,14 @@ begin
   // then those three days must be expressed using AMonth set to the previous
   // month and AWeekOfMonth set to the number of weeks in the previous month
   //
-  // September 1, 1933 is a Friday so asking for the date of the Friday in the
-  // last week of August should return September 1
+  // October 1, 1933 is a Sunday so asking for the date of the Sunday in the
+  // last week of September should return October 1
   //
-  _date := EncodeDateMonthWeek(1933, 8, 5, DayFriday);
+  _date := EncodeDateMonthWeek(1933, 9, 4, DaySunday);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('9-1-1933', DateTimeToStr(_date, _format_settings),
-    True, 'EncodeDateMonthWeek failed to encode 9-1-1933');
+  Assert.AreEqual('10-1-1933', DateTimeToStr(_date, _format_settings),
+    True, 'EncodeDateMonthWeek failed to encode 10-1-1933');
 end;
 
 procedure TDateUtilsEncodeDateMonthWeekTests.TestEncodeDateMonthWeekRule2;
@@ -326,14 +326,14 @@ begin
   // then those three days are expressed with AMonth set to the following month
   // and AWeekOfMonth set to 1
   //
-  // July 31, 1933 is a Monday so asking for the date of the Monday in the
-  // first week of August should return July 31
+  // May 31, 1933 is a Wednesday so asking for the date of the Monday in the
+  // first week of Jun should return May 29
   //
-  _date := EncodeDateMonthWeek(1933, 8, 1, DayMonday);
+  _date := EncodeDateMonthWeek(1933, 6, 1, DayMonday);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('7-31-1933', DateTimeToStr(_date, _format_settings),
-    True, 'EncodeDateMonthWeek failed to encode 7-31-1933');
+  Assert.AreEqual('5-29-1933', DateTimeToStr(_date, _format_settings),
+    True, 'EncodeDateMonthWeek failed to encode 5-29-1933');
 end;
 
 procedure TDateUtilsEncodeDateMonthWeekTests.TestEncodeDateMonthWeek;
