@@ -15,10 +15,6 @@ uses
 type
   [TestFixture]
   TDateUtilsIsValidTests = class
-  private
-    Input: TDateTime;
-    Expected: TDateTime;
-    Actual: TDateTime;
   public
     [Test]
     procedure TestIsValidDate;
