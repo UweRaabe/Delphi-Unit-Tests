@@ -136,42 +136,42 @@ procedure TSysUtilsCaseTests.TestLowerCaseWithAllLowerCase;
 begin
   Expected := 'lower';
   Actual := LowerCase('lower');
-  Assert.AreEqual(Expected, Actual, 'LowerCase starting with all lower case failed');
+  Assert.AreEqual(Expected, Actual, True, 'LowerCase starting with all lower case failed');
 end;
 
 procedure TSysUtilsCaseTests.TestLowerCaseWithAllUpperCase;
 begin
   Expected := 'lower';
   Actual := LowerCase('LOWER');
-  Assert.AreEqual(Expected, Actual, 'LowerCase starting with all upper case failed');
+  Assert.AreEqual(Expected, Actual, True, 'LowerCase starting with all upper case failed');
 end;
 
 procedure TSysUtilsCaseTests.TestLowerCaseWithMixedCase;
 begin
   Expected := 'lower';
   Actual := LowerCase('LoWeR');
-  Assert.AreEqual(Expected, Actual, 'LowerCase with mixed case input failed');
+  Assert.AreEqual(Expected, Actual, True, 'LowerCase with mixed case input failed');
 end;
 
 procedure TSysUtilsCaseTests.TestUpperCaseWithAllUpperCase;
 begin
   Expected := 'UPPER';
   Actual := UpperCase('UPPER');
-  Assert.AreEqual(Expected, Actual, 'UpperCase with already upper case input failed');
+  Assert.AreEqual(Expected, Actual, True, 'UpperCase with already upper case input failed');
 end;
 
 procedure TSysUtilsCaseTests.TestUpperCaseWithAllLowerCase;
 begin
   Expected := 'UPPER';
   Actual := UpperCase('upper');
-  Assert.AreEqual(Expected, Actual, 'UpperCase with all lower case input failed');
+  Assert.AreEqual(Expected, Actual, True, 'UpperCase with all lower case input failed');
 end;
 
 procedure TSysUtilsCaseTests.TestUpperCaseWithMixedCase;
 begin
   Expected := 'UPPER';
   Actual := UpperCase('uPpEr');
-  Assert.AreEqual(Expected, Actual, 'UpperCase with mixed case input failed');
+  Assert.AreEqual(Expected, Actual, True, 'UpperCase with mixed case input failed');
 end;
 
 
@@ -278,7 +278,7 @@ begin
   _time := 0;
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), 'TimeToStr failed to return 0:0:0');
+  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), True, 'TimeToStr failed to return 0:0:0');
 end;
 
 { TSysUtilsEncodeTimeTests }
@@ -294,7 +294,7 @@ begin
   _time := EncodeTime(0,0,0,999); // 999 should be ignored by TimeToStr
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), 'EncodeTime failed to encode 0:0:0');
+  Assert.AreEqual('0:0:0', TimeToStr(_time,_format_settings), True, 'EncodeTime failed to encode 0:0:0');
 end;
 
 
@@ -308,7 +308,7 @@ begin
   _date := 0;
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('12-30-1899', DateToStr(_date,_format_settings), 'DateToStr failed to return 12-30-1899');
+  Assert.AreEqual('12-30-1899', DateToStr(_date,_format_settings), True, 'DateToStr failed to return 12-30-1899');
 end;
 
 { TSysUtilsEncodeDateTests }
@@ -324,7 +324,7 @@ begin
   _date := EncodeDate(1970,1,1);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('1-1-1970', DateToStr(_date,_format_settings), 'EncodeDate failed to encode 1-1-1970');
+  Assert.AreEqual('1-1-1970', DateToStr(_date,_format_settings), True, 'EncodeDate failed to encode 1-1-1970');
 end;
 
 procedure TSysUtilsEncodeDateTests.TestEncodeDateOutOfRangeYear;
@@ -381,7 +381,7 @@ begin
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('12-30-1899 12:0:0', DateTimeToStr(_date,_format_settings), 'DateTimeToStr failed to return 12-30-1899 12:0:0');
+  Assert.AreEqual('12-30-1899 12:0:0', DateTimeToStr(_date,_format_settings), True, 'DateTimeToStr failed to return 12-30-1899 12:0:0');
 end;
 
 initialization

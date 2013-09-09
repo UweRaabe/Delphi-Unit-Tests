@@ -22,7 +22,9 @@ uses
   DUT.DateUtils.MiscFunctions in 'Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas',
   DUT.SysUtils.QC108975 in 'Tests\SysUtils\DUT.SysUtils.QC108975.pas',
   DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas',
-  DUT.SysUtils.BoolStrTests in 'Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas';
+  DUT.SysUtils.BoolStrTests in 'Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas',
+  DUT.DateUtils.EndOf in 'Tests\DateUtils\DUT.DateUtils.EndOf.pas',
+  DUT.DateUtils.HourOf in 'Tests\DateUtils\DUT.DateUtils.HourOf.pas';
 
 var
   Runner: ITestRunner;

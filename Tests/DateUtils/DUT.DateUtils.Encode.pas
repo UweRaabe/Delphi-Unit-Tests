@@ -1,5 +1,5 @@
 unit DUT.DateUtils.Encode;
-
+
 interface
 
 uses
@@ -93,7 +93,23 @@ type
     procedure TestEncodeDateWeek;
   end;
 
-  implementation
+type
+  [TestFixture]
+  TDateUtilsEncodeDayOfWeekInMonthTests = class
+  public
+    [Test]
+    procedure TestEncodeDayOfWeekInMonthOutOfRangeDayOfWeek;
+    [Test]
+    procedure TestEncodeDayOfWeekInMonthOutOfRangeMonth;
+    [Test]
+    procedure TestEncodeDayOfWeekInMonthOutOfRangeNthDayOfWeek;
+    [Test]
+    procedure TestEncodeDayOfWeekInMonthOutOfRangeYear;
+    [Test]
+    procedure TestEncodeDayOfWeekInMonth;
+  end;
+
+implementation
 
 { TDateUtilsEncodeDateTimeTests }
 
@@ -182,7 +198,7 @@ begin
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('1-2-1944 3:4:5', DateTimeToStr(_date,_format_settings), 'EncodeDateTime failed to encode 1-2-1944 3:4:5');
+  Assert.AreEqual('1-2-1944 3:4:5', DateTimeToStr(_date,_format_settings), True, 'EncodeDateTime failed to encode 1-2-1944 3:4:5');
 end;
 
 { TDateUtilsEncodeDateDayTests }
@@ -223,7 +239,7 @@ begin
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   Assert.AreEqual('1-2-1944', DateTimeToStr(_date, _format_settings),
-    'EncodeDateDay failed to encode 1-2-1944');
+    True, 'EncodeDateDay failed to encode 1-2-1944');
 end;
 
 { TestEncodeDateMonthWeekTests }
@@ -288,14 +304,14 @@ begin
   // then those three days must be expressed using AMonth set to the previous
   // month and AWeekOfMonth set to the number of weeks in the previous month
   //
-  // September 1, 1933 is a Friday so asking for the date of the Friday in the
-  // last week of August should return September 1
+  // October 1, 1933 is a Sunday so asking for the date of the Sunday in the
+  // last week of September should return October 1
   //
-  _date := EncodeDateMonthWeek(1933, 8, 5, DayFriday);
+  _date := EncodeDateMonthWeek(1933, 9, 4, DaySunday);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('9-1-1933', DateTimeToStr(_date, _format_settings),
-    'EncodeDateMonthWeek failed to encode 9-1-1933');
+  Assert.AreEqual('10-1-1933', DateTimeToStr(_date, _format_settings),
+    True, 'EncodeDateMonthWeek failed to encode 10-1-1933');
 end;
 
 procedure TDateUtilsEncodeDateMonthWeekTests.TestEncodeDateMonthWeekRule2;
@@ -310,14 +326,14 @@ begin
   // then those three days are expressed with AMonth set to the following month
   // and AWeekOfMonth set to 1
   //
-  // July 31, 1933 is a Monday so asking for the date of the Monday in the
-  // first week of August should return July 31
+  // May 31, 1933 is a Wednesday so asking for the date of the Monday in the
+  // first week of Jun should return May 29
   //
-  _date := EncodeDateMonthWeek(1933, 8, 1, DayMonday);
+  _date := EncodeDateMonthWeek(1933, 6, 1, DayMonday);
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
-  Assert.AreEqual('7-31-1933', DateTimeToStr(_date, _format_settings),
-    'EncodeDateMonthWeek failed to encode 7-31-1933');
+  Assert.AreEqual('5-29-1933', DateTimeToStr(_date, _format_settings),
+    True, 'EncodeDateMonthWeek failed to encode 5-29-1933');
 end;
 
 procedure TDateUtilsEncodeDateMonthWeekTests.TestEncodeDateMonthWeek;
@@ -332,7 +348,7 @@ begin
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   Assert.AreEqual('6-23-1933', DateTimeToStr(_date, _format_settings),
-    'EncodeDateDay failed to encode 6-23-1933');
+    True, 'EncodeDateDay failed to encode 6-23-1933');
 end;
 
 { TDateUtilsEncodeDateWeekTests }
@@ -414,7 +430,7 @@ begin
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   Assert.AreEqual('12-31-1934', DateTimeToStr(_date, _format_settings),
-    'EncodeDateDay failed to encode 12-31-1934');
+    True, 'EncodeDateWeek failed to encode 12-31-1934');
 end;
 
 procedure TDateUtilsEncodeDateWeekTests.TestEncodeDateWeek;
@@ -429,7 +445,78 @@ begin
   _format_settings.DateSeparator := '-';
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   Assert.AreEqual('12-31-1933', DateTimeToStr(_date, _format_settings),
-    'EncodeDateDay failed to encode 12-31-1933');
+    True, 'EncodeDateWeek failed to encode 12-31-1933');
+end;
+
+{ TDateUtilsEncodeDayOfWeekInMonthTests }
+
+procedure TDateUtilsEncodeDayOfWeekInMonthTests.TestEncodeDayOfWeekInMonthOutOfRangeDayOfWeek;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  //
+  // no exception is thrown when ADayOfWeek is out of range - tested with both
+  // 0 and 8. if this intentional then this test can be removed however other
+  // functions which include a DayOfWeek argument throw exceptions when the
+  // value is not from 1-7.
+  //
+  TempMethod := procedure
+    begin
+      EncodeDayOfWeekInMonth(1933, 1, 1, 0);
+    end;
+  Assert.WillRaise(TempMethod, EConvertError,
+    'EncodeDayOfWeekInMonth failed to throw EConvertError exception for DayOfWeek = 0');
+end;
+
+procedure TDateUtilsEncodeDayOfWeekInMonthTests.TestEncodeDayOfWeekInMonthOutOfRangeMonth;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure
+    begin
+      EncodeDayOfWeekInMonth(1933, 0, 1, DayMonday);
+    end;
+  Assert.WillRaise(TempMethod, EConvertError,
+    'EncodeDayOfWeekInMonth failed to throw EConvertError exception for Month = 0');
+end;
+
+procedure TDateUtilsEncodeDayOfWeekInMonthTests.TestEncodeDayOfWeekInMonthOutOfRangeNthDayOfWeek;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure
+    begin
+      EncodeDayOfWeekInMonth(1933, 1, 5, DayFriday);
+    end;
+  Assert.WillRaise(TempMethod, EConvertError,
+    'EncodeDayOfWeekInMonth failed to throw EConvertError exception for NthDayOfWeek = 5');
+end;
+
+procedure TDateUtilsEncodeDayOfWeekInMonthTests.TestEncodeDayOfWeekInMonthOutOfRangeYear;
+var
+  TempMethod: TTestLocalMethod;
+begin
+  TempMethod := procedure
+    begin
+      EncodeDayOfWeekInMonth(0, 1, 1, DayMonday);
+    end;
+  Assert.WillRaise(TempMethod, EConvertError,
+    'EncodeDayOfWeekInMonth failed to throw EConvertError exception for Year = 0');
+end;
+
+procedure TDateUtilsEncodeDayOfWeekInMonthTests.TestEncodeDayOfWeekInMonth;
+var
+  _date: TDateTime;
+  _format_settings: TFormatSettings;
+begin
+  //
+  // this test is NOT for out of range errors
+  //
+  _date := EncodeDayOfWeekInMonth(1933, 1, 5, DayMonday);
+  _format_settings.DateSeparator := '-';
+  _format_settings.ShortDateFormat := 'm-d-yyyy';
+  Assert.AreEqual('1-30-1933', DateTimeToStr(_date, _format_settings),
+    True, 'EncodeDayOfWeekInMonth failed to encode 1-30-1933');
 end;
 
 initialization
@@ -437,4 +524,7 @@ initialization
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDateDayTests);
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDateMonthWeekTests);
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDateWeekTests);
+  TDUnitX.RegisterTestFixture(TDateUtilsEncodeDayOfWeekInMonthTests);
+
 end.
+
