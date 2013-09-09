@@ -1,0 +1,5 @@
+The Delphi Unit Test project is licensed under the Apache License 2.0.
+
+The full text can be found here:  http://opensource.org/licenses/Apache-2.0
+
+The "Too long, didn't read" version can be found here:  http://www.tldrlegal.com/license/apache-license-2.0-(apache-2.0)
