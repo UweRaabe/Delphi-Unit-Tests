@@ -37,7 +37,7 @@
         <DCC_LegacyIFEND>true</DCC_LegacyIFEND>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_ExeOutput>.\%Platform%\%Config%</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
@@ -74,6 +74,8 @@
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC108975.pas"/>
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC109207.pas"/>
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas"/>
+        <DCCReference Include="Tests\DateUtils\DUT.DateUtils.EndOf.pas"/>
+        <DCCReference Include="Tests\DateUtils\DUT.DateUtils.HourOf.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -155,3 +157,4 @@
     </ProjectExtensions>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
 </Project>
+
