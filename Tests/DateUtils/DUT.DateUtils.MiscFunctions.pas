@@ -44,6 +44,12 @@ type
     procedure TestIsTodayWithNotToday;
     [Test]
     procedure TestIsTodayWithToday;
+    [Test]
+    procedure TestHoursBetween;
+    [Test]
+    procedure TestHourSpan;
+    [Test]
+    procedure TestIsSameDay;
   end;
 
 implementation
@@ -135,6 +141,30 @@ end;
 procedure TDateUtilsMiscFunctionTests.TestIsTodayWithToday;
 begin
   Assert.IsTrue(IsToday(Today()), 'IsToday says Today() is not the current date');
+end;
+
+procedure TDateUtilsMiscFunctionTests.TestHoursBetween;
+var
+  _expected, _actual : Int64;
+begin
+  _expected := 36;
+  _actual := HoursBetween(0, 1.5);
+  Assert.AreEqual(_expected, _actual, 0, 'HoursBetween did not return 36');
+end;
+
+procedure TDateUtilsMiscFunctionTests.TestHourSpan;
+var
+  _expected, _actual : Double;
+begin
+  Input := EncodeDateTime(1899, 12, 30, 0, 15, 0, 0);
+  _expected := 48.25;
+  _actual := HourSpan(Input, -2.0);
+  Assert.AreEqual(_expected, _actual, 0, 'HoursBetween did not return 48.25');
+end;
+
+procedure TDateUtilsMiscFunctionTests.TestIsSameDay;
+begin
+  Assert.IsTrue(IsSameDay(0, 0.5), 'IsSameDay failed to return True');
 end;
 
 initialization
