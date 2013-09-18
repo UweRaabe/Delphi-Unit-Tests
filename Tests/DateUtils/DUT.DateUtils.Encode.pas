@@ -1,5 +1,6 @@
 unit DUT.DateUtils.Encode;
-
+
+
 interface
 
 uses
@@ -527,4 +528,4 @@ initialization
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDayOfWeekInMonthTests);
 
 end.
-
+
