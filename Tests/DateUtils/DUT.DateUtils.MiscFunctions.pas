@@ -26,11 +26,17 @@ type
     procedure TestIncHour;
     [Test]
     procedure TestIncMilliSecond;
-    [Test][Ignore('Fails in D2010. Runs backwards for zero dates.')]
+    [Test]
+{$IF CompilerVersion = 21}
+    [Ignore('Fails in D2010. Runs backwards for zero dates.')]
+{$IFEND}
     procedure TestIncMinute;
     [Test]
     procedure TestIncMonth;
-    [Test][Ignore('Fails in D2010. Runs backwards for zero dates.')]
+    [Test]
+{$IF CompilerVersion = 21}
+    [Ignore('Fails in D2010. Runs backwards for zero dates.')]
+{$IFEND}
     procedure TestIncSecond;
     [Test]
     procedure TestIncWeek;

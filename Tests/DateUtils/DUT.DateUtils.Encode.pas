@@ -97,7 +97,10 @@ type
   [TestFixture]
   TDateUtilsEncodeDayOfWeekInMonthTests = class
   public
-    [Test][Ignore('Fails in D2010.')]
+    [Test]
+{$IF CompilerVersion = 21}
+    [Ignore('Fails in D2010.')]
+{$IFEND}
     procedure TestEncodeDayOfWeekInMonthOutOfRangeDayOfWeek;
     [Test]
     procedure TestEncodeDayOfWeekInMonthOutOfRangeMonth;
