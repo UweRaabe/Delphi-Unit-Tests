@@ -29,7 +29,7 @@ uses
 var
   Runner: ITestRunner;
   Logger: ITestLogger;
-  Results: ITestResults;
+  Results: IRunResults;
   {$IFDEF CI}
   XMLLogger : ITestLogger;
   xmlFilePath : string;
