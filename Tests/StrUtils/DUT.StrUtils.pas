@@ -39,6 +39,20 @@ type
     procedure TestContainsTextFirstChar;
     [Test]
     procedure TestContainsTextContainsSelf;
+    [Test]
+    procedure TestContainsTextShouldReturnTrueForSameStringsDifferentCase;
+  end;
+
+  [TestFixture]
+  TStrUtilsContainsStrTests = class
+  private
+    aText, aSubText: String;
+    Actual: Boolean;
+  public
+    [Test]
+    procedure TestContainsStrWithSimpleContains;
+    [Test]
+    procedure TestContainsStrShouldReturnFalseForSameStringsDifferentCase;
   end;
 
   [TestFixture]
@@ -126,6 +140,30 @@ begin
   Assert.IsTrue(Actual, Format('ContainsText says that %s is not contained within %s.', [aSubText, aText]));
 end;
 
+procedure TStrUtilsContainsTextTests.TestContainsTextShouldReturnTrueForSameStringsDifferentCase;
+begin
+  aText := 'abc';
+  aSubText := 'ABC';
+  Actual := ContainsText(aText, aSubText);
+  Assert.IsTrue(Actual, Format('ContainsText says that "%s" is not contained within "%s".', [aSubText, aText]));
+end;
+
+{ TStrUtilsContainsStrTests }
+procedure TStrUtilsContainsStrTests.TestContainsStrWithSimpleContains;
+begin
+  aText := 'abc';
+  aSubText := 'b';
+  Actual := ContainsStr(aText, aSubText);
+  Assert.IsFalse(Actual, Format('ContainsStr says that "%s" is not contained within "%s".', [aSubText, aText]));
+end;
+
+procedure TStrUtilsContainsStrTests.TestContainsStrShouldReturnFalseForSameStringsDifferentCase;
+begin
+  aText := 'abc';
+  aSubText := 'ABC';
+  Actual := ContainsStr(aText, aSubText);
+  Assert.IsFalse(Actual, Format('ContainsStr says that "%s" is not contained within "%s".', [aSubText, aText]));
+end;
 
 { TStrUtilsIfThenTests }
 
@@ -156,6 +194,7 @@ end;
 initialization
   TDUnitX.RegisterTestFixture(TStrUtilsResemblesTests);
   TDUnitX.RegisterTestFixture(TStrUtilsContainsTextTests);
+  TDUnitX.RegisterTestFixture(TStrUtilsContainsStrTests);
   TDUnitX.RegisterTestFixture(TStrUtilsIfThenTests);
 
 end.
