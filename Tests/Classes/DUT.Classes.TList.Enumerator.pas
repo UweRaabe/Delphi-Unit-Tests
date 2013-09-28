@@ -3,6 +3,7 @@ unit DUT.Classes.TList.Enumerator;
 interface
 
 uses
+  Generics.Collections,
   {$if CompilerVersion < 23 }
     Classes,
   {$else}
@@ -38,10 +39,11 @@ implementation
 
 uses
   {$if CompilerVersion < 23 }
-  SysUtils;
+  SysUtils
   {$else}
-  System.SysUtils;
+  System.SysUtils
   {$ifend}
+  ;
 
 { TClassesListEnumeratorTests }
 

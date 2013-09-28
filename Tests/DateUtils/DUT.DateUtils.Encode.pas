@@ -1,5 +1,5 @@
 unit DUT.DateUtils.Encode;
-
+
 interface
 
 uses
@@ -198,7 +198,7 @@ begin
   _format_settings.ShortDateFormat := 'm-d-yyyy';
   _format_settings.TimeSeparator := ':';
   _format_settings.LongTimeFormat := 'h:m:s';
-  Assert.AreEqual('1-2-1944 3:4:5', DateTimeToStr(_date,_format_settings), True, 'EncodeDateTime failed to encode 1-2-1944 3:4:5');
+  Assert.AreEqual('1-2-1944 3:4:5', DateTimeToStr(_date,_format_settings), 'EncodeDateTime failed to encode 1-2-1944 3:4:5');
 end;
 
 { TDateUtilsEncodeDateDayTests }
@@ -527,4 +527,3 @@ initialization
   TDUnitX.RegisterTestFixture(TDateUtilsEncodeDayOfWeekInMonthTests);
 
 end.
-
