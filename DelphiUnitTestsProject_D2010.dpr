@@ -19,12 +19,10 @@ uses
   DUT.DateUtils.Encode in 'Tests\DateUtils\DUT.DateUtils.Encode.pas',
   DUT.StrUtils in 'Tests\StrUtils\DUT.StrUtils.pas',
   DUT.SysUtils in 'Tests\SysUtils\DUT.SysUtils.pas',
+  DUT.Examples.TStringList.QC12345 in 'Tests\Examples\DUT.Examples.TStringList.QC12345.pas',
   DUT.DateUtils.MiscFunctions in 'Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas',
   DUT.SysUtils.QC108975 in 'Tests\SysUtils\DUT.SysUtils.QC108975.pas',
-  DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas',
-  DUT.SysUtils.BoolStrTests in 'Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas',
-  DUT.DateUtils.EndOf in 'Tests\DateUtils\DUT.DateUtils.EndOf.pas',
-  DUT.DateUtils.HourOf in 'Tests\DateUtils\DUT.DateUtils.HourOf.pas';
+  DUT.SysUtils.QC109207 in 'Tests\SysUtils\DUT.SysUtils.QC109207.pas';
 
 var
   Runner: ITestRunner;
@@ -40,7 +38,7 @@ begin
     Runner := TDUnitX.CreateRunner;
     Runner.UseRTTI := True;
     //tell the runner how we will log things
-    Logger := TDUnitXConsoleLogger.Create(true);
+    Logger := TDUnitXConsoleLogger.Create;
     runner.AddLogger(Logger);
 
     {$IFDEF CI}
