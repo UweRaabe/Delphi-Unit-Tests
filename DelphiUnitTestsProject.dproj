@@ -50,13 +50,6 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
-        <Android_LauncherIcon96>$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png</Android_LauncherIcon96>
-        <Android_LauncherIcon48>$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png</Android_LauncherIcon48>
-        <Android_LauncherIcon36>$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png</Android_LauncherIcon36>
-        <Android_LauncherIcon144>$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png</Android_LauncherIcon144>
-        <Android_LauncherIcon72>$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png</Android_LauncherIcon72>
-        <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Keys>package=com.embarcadero.$(MSBuildProjectName);label=$(MSBuildProjectName);versionCode=1;versionName=1.0.0;persistent=False;restoreAnyVersion=False;installLocation=preferExternal;largeHeap=False;theme=TitleBar</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -90,6 +83,7 @@
         <DCCReference Include="Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.EndOf.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.HourOf.pas"/>
+        <DCCReference Include="Tests\Compiler\DUT.Compiler.MethodOlverloadResolutionError.QC118897.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -160,7 +154,6 @@
             </Delphi.Personality>
             <Deployment/>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="emulator-5554">False</Platform>
                 <Platform value="iOSDevice">False</Platform>
                 <Platform value="iOSSimulator">False</Platform>
                 <Platform value="OSX32">False</Platform>

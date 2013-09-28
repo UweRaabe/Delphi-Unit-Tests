@@ -12,7 +12,8 @@ uses
   {$ifend}
    DUnitX.TestFramework;
 
-type
+
+type
   [TestFixture]
   TDateUtilsOfTests = class
   var
