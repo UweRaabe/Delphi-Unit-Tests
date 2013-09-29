@@ -1,4 +1,4 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{18C7FC98-8BC6-461D-B9BA-A5DA76305A8D}</ProjectGuid>
         <ProjectVersion>15.1</ProjectVersion>
@@ -13,11 +13,6 @@
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Android' and '$(Base)'=='true') or '$(Base_Android)'!=''">
-        <Base_Android>true</Base_Android>
-        <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
@@ -49,8 +44,6 @@
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Android)'!=''">
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
@@ -72,18 +65,19 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="DelphiUnitTestsMain.pas"/>
         <DCCReference Include="Tests\Classes\DUT.Classes.TList.Enumerator.pas"/>
+        <DCCReference Include="Tests\Compiler\DUT.Compiler.MethodOlverloadResolutionError.QC118897.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.DateOf.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.Encode.pas"/>
-        <DCCReference Include="Tests\StrUtils\DUT.StrUtils.pas"/>
-        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.pas"/>
-        <DCCReference Include="Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas"/>
-        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC108975.pas"/>
-        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC109207.pas"/>
-        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.EndOf.pas"/>
         <DCCReference Include="Tests\DateUtils\DUT.DateUtils.HourOf.pas"/>
-        <DCCReference Include="Tests\Compiler\DUT.Compiler.MethodOlverloadResolutionError.QC118897.pas"/>
+        <DCCReference Include="Tests\DateUtils\DUT.DateUtils.MiscFunctions.pas"/>
+        <DCCReference Include="Tests\StrUtils\DUT.StrUtils.pas"/>
+        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.pas"/>
+        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.BoolStrTests.pas"/>
+        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC108975.pas"/>
+        <DCCReference Include="Tests\SysUtils\DUT.SysUtils.QC109207.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
