@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{6C5F3E88-062B-4626-9FB4-77B432888BC2}</ProjectGuid>
 			<MainSource>DelphiUnitTestsProject.dpr</MainSource>

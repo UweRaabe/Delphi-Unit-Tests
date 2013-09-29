@@ -168,3 +168,4 @@ initialization
   TDUnitX.RegisterTestFixture(TClassesListEnumeratorTests);
 
 end.
+
