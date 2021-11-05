@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{93D745FD-2D0B-4F64-AC70-6268DD14F00B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DelphiUnitTestsFAILURES_XE3.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DelphiUnitTestsProject_XE3.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DelphiUnitTestsFAILURES_XE3">
+        <MSBuild Projects="DelphiUnitTestsFAILURES_XE3.dproj"/>
+    </Target>
+    <Target Name="DelphiUnitTestsFAILURES_XE3:Clean">
+        <MSBuild Projects="DelphiUnitTestsFAILURES_XE3.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiUnitTestsFAILURES_XE3:Make">
+        <MSBuild Projects="DelphiUnitTestsFAILURES_XE3.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject_XE3">
+        <MSBuild Projects="DelphiUnitTestsProject_XE3.dproj"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject_XE3:Clean">
+        <MSBuild Projects="DelphiUnitTestsProject_XE3.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiUnitTestsProject_XE3:Make">
+        <MSBuild Projects="DelphiUnitTestsProject_XE3.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DelphiUnitTestsFAILURES_XE3;DelphiUnitTestsProject_XE3"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DelphiUnitTestsFAILURES_XE3:Clean;DelphiUnitTestsProject_XE3:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DelphiUnitTestsFAILURES_XE3:Make;DelphiUnitTestsProject_XE3:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

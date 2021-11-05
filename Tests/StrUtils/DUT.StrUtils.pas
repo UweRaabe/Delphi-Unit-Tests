@@ -69,6 +69,35 @@ type
     procedure TestIfThenReturnsFalseIsOptional;
   end;
 
+  [TestFixture]
+  TStrUtilsStartsTextTests = class
+    [Test]
+    procedure TestThatStartTestRecognizesFirstLetter;
+    [Test]
+    procedure TestThatStartTextSeesFirstTwoLetters;
+    [Test]
+    procedure TestThatCompleteTextReturnsTrue;
+    [Test]
+    procedure TestToMakeSureLongerStringFails;
+  end;
+
+  TStrUtilsAnsiStartsTextTests = class
+    [Test]
+    procedure TestThatCompleteTextReturnsTrue;
+    [Test]
+    procedure TestThatStartTestRecognizesFirstLetter;
+    [Test]
+    procedure TestThatStartTextSeesFirstTwoLetters;
+    [Test]
+    procedure TestToMakeSureLongerStringFails;
+  end;
+
+  [TestFixture]
+  TStrUtilsEndsTextTests = class
+    [Test]
+    procedure TestSimpleExampleWithAlphabet;
+  end;
+
 implementation
 
 uses
@@ -191,10 +220,119 @@ begin
 end;
 
 
+{ TStrUtilsStartsTextTests }
+
+
+procedure TStrUtilsStartsTextTests.TestThatCompleteTextReturnsTrue;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := True;
+  Actual := StartsText('boondoggle', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+procedure TStrUtilsStartsTextTests.TestThatStartTestRecognizesFirstLetter;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := True;
+  Actual := StartsText('b', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+procedure TStrUtilsStartsTextTests.TestThatStartTextSeesFirstTwoLetters;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := True;
+  Actual := StartsText('bo', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+procedure TStrUtilsStartsTextTests.TestToMakeSureLongerStringFails;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := False;
+  Actual := StartsText('boondoggles', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+{ TStrUtilsAnsiStartsTextTests }
+
+procedure TStrUtilsAnsiStartsTextTests.TestThatCompleteTextReturnsTrue;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := True;
+  Actual := AnsiStartsText('boondoggle', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+procedure TStrUtilsAnsiStartsTextTests.TestThatStartTestRecognizesFirstLetter;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := True;
+  Actual := AnsiStartsText('b', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+procedure TStrUtilsAnsiStartsTextTests.TestThatStartTextSeesFirstTwoLetters;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := True;
+  Actual := AnsiStartsText('bo', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+procedure TStrUtilsAnsiStartsTextTests.TestToMakeSureLongerStringFails;
+var
+  Expected, Actual: Boolean;
+begin
+  Expected := False;
+  Actual := AnsiStartsText('boondoggles', 'boondoggle');
+
+  Assert.AreEqual(Expected, Actual);
+
+end;
+
+{ TStrUtilsEndsTextTests }
+
+procedure TStrUtilsEndsTextTests.TestSimpleExampleWithAlphabet;
+var
+  Expected: Boolean;
+  Actual: Boolean;
+begin
+  Expected := True;
+  Actual := EndsText('c', 'abc');
+
+  Assert.AreEqual(Expected, Actual);
+end;
+
 initialization
   TDUnitX.RegisterTestFixture(TStrUtilsResemblesTests);
   TDUnitX.RegisterTestFixture(TStrUtilsContainsTextTests);
   TDUnitX.RegisterTestFixture(TStrUtilsContainsStrTests);
   TDUnitX.RegisterTestFixture(TStrUtilsIfThenTests);
+  TDUnitX.RegisterTestFixture(TStrUtilsStartsTextTests);
+  TDUnitX.RegisterTestFixture(TStrUtilsAnsiStartsTextTests);
+  TDUnitX.RegisterTestFixture(TStrUtilsEndsTextTests);
 
 end.

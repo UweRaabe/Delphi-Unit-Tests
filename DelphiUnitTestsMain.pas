@@ -1,6 +1,6 @@
 unit DelphiUnitTestsMain;
 
-{$define CI}
+{ $define CI}
 
 interface
 

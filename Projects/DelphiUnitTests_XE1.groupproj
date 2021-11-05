@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{45EBF027-6532-417F-B168-843639C527CD}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DelphiUnitTestsFAILURES_XE1.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DelphiUnitTestsProject_XE1.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DelphiUnitTestsFAILURES_XE1">
+			<MSBuild Projects="DelphiUnitTestsFAILURES_XE1.dproj"/>
+		</Target>
+		<Target Name="DelphiUnitTestsFAILURES_XE1:Clean">
+			<MSBuild Targets="Clean" Projects="DelphiUnitTestsFAILURES_XE1.dproj"/>
+		</Target>
+		<Target Name="DelphiUnitTestsFAILURES_XE1:Make">
+			<MSBuild Targets="Make" Projects="DelphiUnitTestsFAILURES_XE1.dproj"/>
+		</Target>
+		<Target Name="DelphiUnitTestsProject_XE1">
+			<MSBuild Projects="DelphiUnitTestsProject_XE1.dproj"/>
+		</Target>
+		<Target Name="DelphiUnitTestsProject_XE1:Clean">
+			<MSBuild Targets="Clean" Projects="DelphiUnitTestsProject_XE1.dproj"/>
+		</Target>
+		<Target Name="DelphiUnitTestsProject_XE1:Make">
+			<MSBuild Targets="Make" Projects="DelphiUnitTestsProject_XE1.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DelphiUnitTestsFAILURES_XE1;DelphiUnitTestsProject_XE1"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DelphiUnitTestsFAILURES_XE1:Clean;DelphiUnitTestsProject_XE1:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DelphiUnitTestsFAILURES_XE1:Make;DelphiUnitTestsProject_XE1:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>
