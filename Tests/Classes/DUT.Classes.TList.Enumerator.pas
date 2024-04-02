@@ -4,12 +4,8 @@ interface
 
 uses
   Generics.Collections,
-  {$if CompilerVersion < 23 }
-    Classes,
-  {$else}
-    System.Classes, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-  {$ifend}
-   DUnitX.TestFramework;
+  System.Classes,
+  DUnitX.TestFramework;
 
 type
   [TestFixture]
@@ -38,12 +34,7 @@ type
 implementation
 
 uses
-  {$if CompilerVersion < 23 }
-  SysUtils
-  {$else}
-  System.SysUtils
-  {$ifend}
-  ;
+  System.SysUtils;
 
 { TClassesListEnumeratorTests }
 

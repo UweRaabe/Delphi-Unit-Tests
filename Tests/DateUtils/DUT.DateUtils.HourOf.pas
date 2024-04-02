@@ -3,12 +3,8 @@ unit DUT.DateUtils.HourOf;
 interface
 
 uses
-  {$if CompilerVersion < 23 }
-    DateUtils,
-  {$else}
-    System.DateUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-  {$ifend}
-   DUnitX.TestFramework;
+  System.DateUtils,
+  DUnitX.TestFramework;
 
 type
   [TestFixture]

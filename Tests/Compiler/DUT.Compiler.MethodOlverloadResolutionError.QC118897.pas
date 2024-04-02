@@ -3,15 +3,9 @@ unit DUT.Compiler.MethodOlverloadResolutionError.QC118897;
 interface
 
 uses
-  {$if CompilerVersion < 23 }
-    SysUtils,
-    TypInfo,
-  {$else}
-    System.SysUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-    System.TypInfo,
-  {$ifend}
-  DUnitX.TestFramework
-  ;
+  System.SysUtils,
+  System.TypInfo,
+  DUnitX.TestFramework;
 
 type
   IInterfaceDefinition = interface(IInterface)

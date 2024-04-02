@@ -3,14 +3,9 @@ unit DUT.DateUtils.DateOf;
 interface
 
 uses
-  {$if CompilerVersion < 23 }
-    DateUtils,
-    SysUtils,
-  {$else}
-    System.DateUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-    System.SysUtils,
-  {$ifend}
-   DUnitX.TestFramework;
+  System.DateUtils,
+  System.SysUtils,
+  DUnitX.TestFramework;
 
 
 type

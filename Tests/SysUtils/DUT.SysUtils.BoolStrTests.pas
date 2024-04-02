@@ -3,13 +3,8 @@ unit DUT.SysUtils.BoolStrTests;
 interface
 
 uses
-  {$if CompilerVersion < 23 }
-    SysUtils,
-  {$else}
-    System.SysUtils, // Delphi XE2 (CompilerVersion 23) added scopes in front of unit names
-  {$ifend}
-  DUnitX.TestFramework
-  ;
+  System.SysUtils,
+  DUnitX.TestFramework;
 
 type
   [TestFixture]
