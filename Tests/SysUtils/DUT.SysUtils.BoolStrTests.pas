@@ -58,11 +58,8 @@ end;
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStr;
 begin
   FalseBoolStrs := Nil;
-  Actual := '';
   BoolToStr(False);
-  if Length(FalseBoolStrs) > 0 then
-    Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, True, 'FalseBoolStrs[0] should be the string False');
+  Assert.IsFalse(Length(FalseBoolStrs) > 0, 'FalseBoolStrs should not be initialized when BoolToStr is called with UseBoolStrs = False');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithBoolToStrWithoutDefParams;
@@ -78,11 +75,8 @@ end;
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithStrToBool;
 begin
   FalseBoolStrs := Nil;
-  Actual := '';
   StrToBool('0');
-  if Length(FalseBoolStrs) > 0 then
-    Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, True, 'FalseBoolStrs[0] should be the string False');
+  Assert.IsFalse(Length(FalseBoolStrs) > 0, 'FalseBoolStrs should not be initialized when StrToBool is called with a valid numeric string');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrsInitWithTryStrToBool;
@@ -90,11 +84,8 @@ var
   _val : Boolean;
 begin
   FalseBoolStrs := Nil;
-  Actual := '';
   TryStrToBool('0',_val);
-  if Length(FalseBoolStrs) > 0 then
-    Actual := FalseBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, True, 'FalseBoolStrs[0] should be the string False');
+  Assert.IsFalse(Length(FalseBoolStrs) > 0, 'FalseBoolStrs should not be initialized when TryStrToBool is called with a valid numeric string');
 end;
 
 procedure TSysUtilsFalseBoolStrsTests.TestFalseBoolStrs;
@@ -113,11 +104,8 @@ end;
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStr;
 begin
   TrueBoolStrs := Nil;
-  Actual := '';
   BoolToStr(True);
-  if Length(TrueBoolStrs) > 0 then
-    Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
+  Assert.IsFalse(Length(TrueBoolStrs) > 0, 'TrueBoolStrs should not be initialized when BoolToStr is called with UseBoolStrs = False');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithBoolToStrWithoutDefParams;
@@ -133,11 +121,8 @@ end;
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithStrToBool;
 begin
   TrueBoolStrs := Nil;
-  Actual := '';
   StrToBool('1');
-  if Length(TrueBoolStrs) > 0 then
-    Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
+  Assert.IsFalse(Length(TrueBoolStrs) > 0, 'TrueBoolStrs should not be initialized when StrToBool is called with a valid numeric string');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrsInitWithTryStrToBool;
@@ -145,11 +130,8 @@ var
   _val : Boolean;
 begin
   TrueBoolStrs := Nil;
-  Actual := '';
   TryStrToBool('1',_val);
-  if Length(TrueBoolStrs) > 0 then
-    Actual := TrueBoolStrs[0];
-  Assert.AreEqual(Expected, Actual, True, 'TrueBoolStrs[0] should be the string True');
+  Assert.IsFalse(Length(TrueBoolStrs) > 0, 'TrueBoolStrs should not be initialized when TryStrToBool is called with a valid numeric string');
 end;
 
 procedure TSysUtilsTrueBoolStrsTests.TestTrueBoolStrs;

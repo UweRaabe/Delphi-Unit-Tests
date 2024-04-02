@@ -179,7 +179,7 @@ begin
   aText := 'abc';
   aSubText := 'b';
   Actual := ContainsStr(aText, aSubText);
-  Assert.IsFalse(Actual, Format('ContainsStr says that "%s" is not contained within "%s".', [aSubText, aText]));
+  Assert.IsTrue(Actual, Format('ContainsStr says that "%s" is not contained within "%s".', [aSubText, aText]));
 end;
 
 procedure TStrUtilsContainsStrTests.TestContainsStrShouldReturnFalseForSameStringsDifferentCase;
@@ -187,7 +187,7 @@ begin
   aText := 'abc';
   aSubText := 'ABC';
   Actual := ContainsStr(aText, aSubText);
-  Assert.IsFalse(Actual, Format('ContainsStr says that "%s" is not contained within "%s".', [aSubText, aText]));
+  Assert.IsFalse(Actual, Format('ContainsStr says that "%s" is contained within "%s".', [aSubText, aText]));
 end;
 
 { TStrUtilsIfThenTests }

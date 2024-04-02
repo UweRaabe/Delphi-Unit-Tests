@@ -112,14 +112,11 @@ type
   end;
 
 procedure Check(const Description: string; const Method: string; const Expected: string);
-var
-  OverloadResolutionError: EOverloadResolutionError;
 begin
   if 0 = Pos(Expected, Description) then
-  begin
-    OverloadResolutionError := EOverloadResolutionError.Create(Description, Method);
-    raise OverloadResolutionError;
-  end;
+    Assert.FailFmt('Overload resolution error: "%s" parameter called "%s"', [Description, Method]);
+
+  Assert.Pass();
 end;
 
 procedure GlobalPlainOverloadMethod(const Description: string; const Item: Pointer); overload;
