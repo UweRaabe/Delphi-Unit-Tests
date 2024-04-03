@@ -8,10 +8,9 @@ uses
   System.SysUtils,
   {$IFDEF TESTINSIGHT}
   TestInsight.DUnitX,
-  {$ELSE}
+  {$ENDIF }
   DUnitX.Loggers.Console,
   DUnitX.Loggers.XML.NUnit,
-  {$ENDIF }
   DUnitX.TestFramework,
   DUT.Classes.TList.Enumerator in 'Tests\Classes\DUT.Classes.TList.Enumerator.pas',
   DUT.Compiler.MethodOlverloadResolutionError.QC118897 in 'Tests\Compiler\DUT.Compiler.MethodOlverloadResolutionError.QC118897.pas',
