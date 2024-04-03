@@ -28,6 +28,9 @@ type
     [Test]
     procedure TestListEnumerator_MoveNext_ReturnsFalseOnReachingEndOfList;
     [Test]
+{$IF (RTLVersion < 36) }
+    [Ignore('This test fails up to Delphi 11.3, so disable it for these versions')]
+{$IFEND}
     procedure TestListEnumerator_MoveNext_DoesNotPassEndOfList;
   end;
 
